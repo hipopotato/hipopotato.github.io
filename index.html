@@ -7,43 +7,76 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            display: flex;
+            max-width: 1200px;
             margin: auto;
             padding: 20px;
+        }
+        .content {
+            flex: 3;
+            padding: 20px;
+        }
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border-left: 2px solid #ddd;
+            margin-left: 20px;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
         }
         nav a {
             display: block;
             padding: 8px;
             margin: 4px 0;
-            background-color: #f0f0f0;
+            background-color: #e0e0e0;
             text-decoration: none;
             color: #333;
             border-radius: 4px;
         }
         nav a:hover {
-            background-color: #ddd;
+            background-color: #ccc;
+        }
+        .button-start {
+            display: block;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        header, footer {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Repositório de Exercícios de Matemática</h1>
-        <p>Bem-vindo ao repositório de exercícios para estudantes do Mestrado Profissionalizante em Matemática. Clique na disciplina para acessar os exercícios.</p>
-    </header>
-    
-    <nav>
-        <h2>Disciplinas</h2>
-        <a href="ma11.html">MA 11 – Números e Funções Reais</a>
-        <a href="ma12.html">MA 12 - Matemática Discreta</a>
-        <a href="ma13.html">MA 13 – Geometria</a>
-        <a href="ma14.html">MA 14 - Aritmética</a>
-        <a href="ma21.html">MA 21 - Resolução de Problemas</a>
-        <a href="ma22.html">MA 22 – Fundamentos de Cálculo</a>
-        <a href="ma23.html">MA 23 - Geometria Analítica</a>
-    </nav>
-    
-    <footer>
-        <p>&copy; 2024 Repositório de Exercícios de Matemática</p>
-    </footer>
+    <div class="content">
+        <header>
+            <h1>Repositório de Exercícios de Matemática</h1>
+            <p>Bem-vindo ao repositório de exercícios, criado para apoiar estudantes do Mestrado Profissionalizante em Matemática. Clique na disciplina para acessar os exercícios.</p>
+        </header>
+
+        <footer>
+            <p>&copy; 2024 Repositório de Exercícios de Matemática</p>
+        </footer>
+    </div>
+
+    <div class="sidebar">
+        <h2>Navegação</h2>
+        <nav>
+            <a href="index.html" class="button-start">Início</a>
+            <a href="ma11.html">MA 11 – Números e Funções Reais</a>
+            <a href="ma12.html">MA 12 - Matemática Discreta</a>
+            <a href="ma13.html">MA 13 – Geometria</a>
+            <a href="ma14.html">MA 14 - Aritmética</a>
+            <a href="ma21.html">MA 21 - Resolução de Problemas</a>
+            <a href="ma22.html">MA 22 – Fundamentos de Cálculo</a>
+            <a href="ma23.html">MA 23 - Geometria Analítica</a>
+        </nav>
+    </div>
 </body>
 </html>
