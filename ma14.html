@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MA 11 – Números e Funções Reais</title>
+    <title>MA 14 – Aritmética</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +19,15 @@
             height: 100px;
             margin-top: 10px;
         }
+        header {
+            text-align: center; /* Centraliza o conteúdo dentro do cabeçalho */
+        }
+        header img {
+            width: 900px;  /* Largura de 15px */
+            height: 900px; /* Altura de 15px */
+            margin-top: 10px; /* Espaçamento acima da imagem */
+            object-fit: contain; /* Garante que a imagem se ajuste sem distorção */
+        }
     </style>
 </head>
 <body>
@@ -29,6 +38,12 @@
     <section>
         <p>Aqui você encontra exercícios sobre Números e Funções Reais, específicos para o mestrado profissionalizante em matemática.</p>
         <!-- Conteúdo da disciplina pode ser adicionado aqui -->
+        <div class="content">
+        <header>
+            <!-- Imagem centralizada embaixo da frase inicial -->
+            <img src="https://github.com/hipopotato/hipopotato.github.io/blob/eb0c67a8aadf030dc37ccaf84918832ec788e8db/logo1.jpeg?raw=true" alt="Logo do Repositório">
+           
+        </header>
     </section>
     
     <section class="comment-section">
@@ -38,6 +53,21 @@
             <textarea id="comment" name="comment" placeholder="Escreva seu comentário aqui..."></textarea>
             <button type="submit">Publicar Comentário</button>
         </form>
+          <div class="sidebar" id="nav-container">
+        <!-- O menu de navegação será carregado aqui -->
+    </div>
+
+    <script>
+        // JavaScript para carregar o conteúdo do arquivo nav.html no elemento com id "nav-container"
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("nav.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("nav-container").innerHTML = data;
+                })
+                .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
+        });
+    </script> 
     </section>
     
     <footer>
