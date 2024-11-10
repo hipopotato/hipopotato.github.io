@@ -3,78 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Repositório de Exercícios de Matemática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        header, nav, section, footer {
+            margin-bottom: 20px;
+        }
+        nav a {
+            display: block;
+            padding: 8px;
+            margin: 4px 0;
+            background-color: #f0f0f0;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+        }
+        nav a:hover {
+            background-color: #ddd;
+        }
+        .comment-section {
+            margin-top: 30px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Meu Portfólio</h1>
-        <nav>
-            <a href="#intro" class="nav-link">Início</a>
-            <a href="#about" class="nav-link">Sobre Mim</a>
-            <a href="#portfolio" class="nav-link">Portfólio</a>
-            <a href="#contact" class="nav-link">Contato</a>
-            <a href="#fotos" class="nav-link">Fotos</a>
-        </nav>
+        <h1>Repositório de Exercícios de Matemática</h1>
+        <p>Bem-vindo ao repositório de exercícios, criado para apoiar estudantes do Mestrado Profissionalizante em Matemática. Aqui você encontrará exercícios organizados por disciplina.</p>
     </header>
-
-    <section id="intro" class="section">
-        <h2>Bem-vindo ao Meu Portfólio</h2>
-        <p style='text-align:justify' >Olá! Meu nome é Daiane, e sou professora em uma escola pública no interior do Rio Grande do Sul. Tenho 32 anos e sou formada em Licenciatura em Matemática pela Universidade Federal de Santa Maria.
-
-Com esta página, meu objetivo é compartilhar algumas ideias e pensamentos sobre educação, matemática e outros tópicos que me fascinam. Acredito que o ensino e a aprendizagem são processos contínuos e dinâmicos, e espero contribuir com insights e recursos que possam inspirar e apoiar tanto professores quanto alunos.
-
-Sinta-se à vontade para explorar, comentar e compartilhar suas próprias ideias. Juntos, podemos criar um espaço enriquecedor e colaborativo para todos os amantes da educação e da matemática.</p>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Seja bem-vindo(mmmmma) e boa leitura!</p>
+    
+    <nav>
+        <h2>Disciplinas</h2>
+        <a href="#ma11">MA 11 – Números e Funções Reais</a>
+        <a href="#ma12">MA 12 - Matemática Discreta</a>
+        <a href="#ma13">MA 13 – Geometria</a>
+        <a href="#ma14">MA 14 - Aritmética</a>
+        <a href="#ma21">MA 21 - Resolução de Problemas</a>
+        <a href="#ma22">MA 22 – Fundamentos de Cálculo</a>
+        <a href="#ma23">MA 23 - Geometria Analítica</a>
+    </nav>
+    
+    <section id="ma11">
+        <h2>MA 11 – Números e Funções Reais</h2>
+        <p>Conteúdo de Números e Funções Reais.</p>
     </section>
-
-    <section id="about" class="section">
-        <h2>Sobre Mim</h2>
-        <p>Olá! Eu sou [Seu Nome], um desenvolvedor web com paixão por criar soluções criativas e eficientes.</p>
+    
+    <section id="ma12">
+        <h2>MA 12 - Matemática Discreta</h2>
+        <p>Conteúdo de Matemática Discreta.</p>
     </section>
-
-    <section id="portfolio" class="section">
-        <h2>Portfólio</h2>
-        <div class="portfolio-grid">
-            <div class="portfolio-item">
-                <h3>Projeto 1</h3>
-                <p>Descrição do projeto 1.</p>
-            </div>
-            <div class="portfolio-item">
-                <h3>Projeto 2</h3>
-                <p>Descrição do projeto 2.</p>
-            </div>
-            <div class="portfolio-item">
-                <h3>Projeto 3</h3>
-                <p>Descrição do projeto 3.</p>
-            </div>
-            <!-- Adicione mais projetos conforme necessário -->
-        </div>
+    
+    <section id="ma13">
+        <h2>MA 13 – Geometria</h2>
+        <p>Conteúdo de Geometria.</p>
     </section>
-
-    <section id="contact" class="section">
-        <h2>Contato</h2>
-        <p>Entre em contato comigo através das redes sociais ou envie um e-mail para [seu-email@dominio.com].
-        <a href="/teste.html"> link </a>
-        
-        </p>
+    
+    <section id="ma14">
+        <h2>MA 14 - Aritmética</h2>
+        <p>Conteúdo de Aritmética.</p>
     </section>
-       <section id="fotos" class="section">
-        <h2>Fotos</h2>
-        <p>balababkabkba [seu-email@dominio.com].</p>
+    
+    <section id="ma21">
+        <h2>MA 21 - Resolução de Problemas</h2>
+        <p>Conteúdo de Resolução de Problemas.</p>
     </section>
-
+    
+    <section id="ma22">
+        <h2>MA 22 – Fundamentos de Cálculo</h2>
+        <p>Conteúdo de Fundamentos de Cálculo.</p>
+    </section>
+    
+    <section id="ma23">
+        <h2>MA 23 - Geometria Analítica</h2>
+        <p>Conteúdo de Geometria Analítica.</p>
+    </section>
+    
+    <section class="comment-section">
+        <h2>Deixe seu Comentário</h2>
+        <form action="#" method="post">
+            <label for="comment">Comentário:</label>
+            <textarea id="comment" name="comment" placeholder="Escreva seu comentário aqui..."></textarea>
+            <button type="submit">Publicar Comentário</button>
+        </form>
+    </section>
+    
     <footer>
-        <p>&copy; 2024 Meu Nome. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Repositório de Exercícios de Matemática</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
