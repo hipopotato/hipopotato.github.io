@@ -26,11 +26,7 @@
     </style>
 </head>
 <body>
-     <header>
-        <div id="nav-container">
-            <!-- O menu de navegação será carregado aqui -->
-        </div>
-    </header>
+    
     <header>
         <h1>Repositório de Exercícios de Matemática</h1>
         <p>Bem-vindo ao repositório de exercícios para estudantes do Mestrado Profissionalizante em Matemática. Clique na disciplina para acessar os exercícios.</p>
@@ -46,7 +42,24 @@
         <a href="ma22.html">MA 22 – Fundamentos de Cálculo</a>
         <a href="ma23.html">MA 23 - Geometria Analítica</a>
     </nav>
-    
+     </div>
+
+    <!-- Barra lateral para o menu -->
+    <div class="sidebar" id="nav-container">
+        <!-- O menu de navegação será carregado aqui -->
+    </div>
+
+    <script>
+        // JavaScript para carregar o conteúdo do arquivo nav.html no elemento com id "nav-container"
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("nav.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("nav-container").innerHTML = data;
+                })
+                .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
+        });
+    </script>
     <footer>
         <p>&copy; 2024 Repositório de Exercícios de Matemática</p>
     </footer>
