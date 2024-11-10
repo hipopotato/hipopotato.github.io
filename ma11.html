@@ -19,7 +19,7 @@
             height: 100px;
             margin-top: 10px;
         }
-         header {
+        header {
             text-align: center; /* Centraliza o conteúdo dentro do cabeçalho */
         }
         header img {
@@ -39,14 +39,15 @@
         <p>"Hm... ainda não tem nada por aqui. Talvez, um dia, eu consiga colocar algo útil, ou não."</p>
         <!-- Conteúdo da disciplina pode ser adicionado aqui -->
 
-          <div class="content">
-        <header>
-            <!-- Imagem centralizada embaixo da frase inicial -->
-            <img src="https://github.com/hipopotato/hipopotato.github.io/blob/eb0c67a8aadf030dc37ccaf84918832ec788e8db/logo1.jpeg?raw=true" alt="Logo do Repositório">
-           
-        </header>
+        <div class="content">
+            <header>
+                <!-- Imagem centralizada embaixo da frase inicial -->
+                <img src="https://github.com/hipopotato/hipopotato.github.io/blob/eb0c67a8aadf030dc37ccaf84918832ec788e8db/logo1.jpeg?raw=true" alt="Logo do Repositório">
+            </header>
+        </div>
     </section>
-     <div class="sidebar" id="nav-container">
+
+    <div class="sidebar" id="nav-container">
         <!-- O menu de navegação será carregado aqui -->
     </div>
 
@@ -61,7 +62,9 @@
                 .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
         });
     </script> 
-     <div id="disqus_thread"></div>
+
+    <!-- Seção de comentários do Disqus -->
+    <div id="disqus_thread"></div>
     <script>
         var disqus_config = function () {
             this.page.url = 'https://hipopotato.github.io/ma11.html';  // URL específica da página
@@ -70,18 +73,15 @@
     
         (function() {  // O código do Disqus
             var d = document, s = d.createElement('script');
-            s.src = 'https://disqus_NLDCrVeqO7.disqus.com/embed.js';  // Substituindo pelo seu nome de usuário Disqus
+            s.src = 'https://hipopotato.disqus.com/embed.js';  // Corrigido para o seu nome de usuário Disqus
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();
     </script>
     <noscript>Por favor, ative o JavaScript para visualizar os comentários fornecidos pelo Disqus.</noscript>
 
-
-    
     <footer>
         <p><a href="index.html">Voltar para a página principal</a></p>
     </footer>
-   
 </body>
 </html>
