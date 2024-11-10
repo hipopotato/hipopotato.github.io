@@ -61,14 +61,23 @@
                 .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
         });
     </script> 
-    <section class="comment-section">
-        <h2>Deixe seu Comentário</h2>
-        <form action="#" method="post">
-            <label for="comment">Comentário:</label>
-            <textarea id="comment" name="comment" placeholder="Escreva seu comentário aqui..."></textarea>
-            <button type="submit">Publicar Comentário</button>
-        </form>
-    </section>
+     <!-- Seção de comentários do Disqus -->
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;  // Página URL
+            this.page.identifier = document.title;  // Usando o título da página como identificador
+        };
+    
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = 'https://SEU_SITENAME.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Por favor, ative o JavaScript para visualizar os comentários fornecidos pelo Disqus.</noscript>
+
     
     <footer>
         <p><a href="index.html">Voltar para a página principal</a></p>
