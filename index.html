@@ -44,22 +44,7 @@
     </nav>
      </div>
 
-    <!-- Barra lateral para o menu -->
-    <div class="sidebar" id="nav-container">
-        <!-- O menu de navegação será carregado aqui -->
-    </div>
-
-    <script>
-        // JavaScript para carregar o conteúdo do arquivo nav.html no elemento com id "nav-container"
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch("nav.html")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("nav-container").innerHTML = data;
-                })
-                .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
-        });
-    </script>
+   
     <footer>
         <p>&copy; 2024 Repositório de Exercícios de Matemática</p>
     </footer>
