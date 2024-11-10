@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    fetch("nav.html")
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MA 11 – Números e Funções Reais</title>
@@ -44,5 +43,16 @@
     <footer>
         <p><a href="index.html">Voltar para a página principal</a></p>
     </footer>
+     <script>
+        // JavaScript para carregar o conteúdo do arquivo nav.html no elemento com id "nav-container"
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("nav.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("nav-container").innerHTML = data;
+                })
+                .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
+        });
+    </script>
 </body>
 </html>
