@@ -61,22 +61,22 @@
                 .catch(error => console.error("Erro ao carregar o menu de navegação:", error));
         });
     </script> 
-     <!-- Seção de comentários do Disqus -->
-    <div id="disqus_thread"></div>
+     <div id="disqus_thread"></div>
     <script>
         var disqus_config = function () {
-            this.page.url = window.location.href;  // Página URL
-            this.page.identifier = document.title;  // Usando o título da página como identificador
+            this.page.url = 'https://hipopotato.github.io/ma11.html';  // URL específica da página
+            this.page.identifier = 'MA_11_Numeros_e_Funcoes_Reais';  // Usando um identificador único para esta página
         };
     
-        (function() {
+        (function() {  // O código do Disqus
             var d = document, s = d.createElement('script');
-            s.src = 'https://disqus.com/by/disqus_NLDCrVeqO7.js';
+            s.src = 'https://disqus_NLDCrVeqO7.disqus.com/embed.js';  // Substituindo pelo seu nome de usuário Disqus
             s.setAttribute('data-timestamp', +new Date());
             (d.head || d.body).appendChild(s);
         })();
     </script>
     <noscript>Por favor, ative o JavaScript para visualizar os comentários fornecidos pelo Disqus.</noscript>
+
 
     
     <footer>
