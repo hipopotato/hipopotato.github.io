@@ -1,97 +1,107 @@
 /* Definições globais */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; /* Remove as margens padrão de todos os elementos */
+    padding: 0; /* Remove o preenchimento padrão de todos os elementos */
+    box-sizing: border-box; /* Inclui as bordas e o preenchimento no cálculo da largura e altura total do elemento */
 }
 
+/* Estilo dos títulos h2 */
 h2 {
-    color: #013840; /* Azul petróleo */
-    font-family: 'Roboto', sans-serif;
+    color: #013840; /* Define a cor do texto como azul petróleo */
+    font-family: 'Roboto', sans-serif; /* Aplica a fonte 'Roboto' */
 }
 
+/* Estilos gerais do corpo (body) */
 body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #c5e3fa, #01579b); /* Gradiente de azul */
-    color: #fff;
-    line-height: 1.6;
-    padding: 20px;
+    font-family: 'Roboto', sans-serif; /* Define a fonte do corpo do site */
+    background: linear-gradient(to right, #c5e3fa, #01579b); /* Aplica um gradiente de fundo em tons de azul */
+    color: #fff; /* Define a cor do texto como branco */
+    line-height: 1.6; /* Aumenta o espaçamento entre linhas para melhorar a legibilidade */
+    padding: 20px; /* Adiciona um espaçamento interno nas bordas do body */
 }
 
+/* Estilo do cabeçalho (header) */
 header {
-    background-color: #0288d1; /* Cabeçalho azul */
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-bottom: 20px;
+    background-color: #0288d1; /* Define a cor de fundo do cabeçalho como azul */
+    color: #fff; /* Define a cor do texto como branco */
+    text-align: center; /* Centraliza o texto no cabeçalho */
+    padding: 20px; /* Adiciona espaçamento interno ao cabeçalho */
+    margin-bottom: 20px; /* Adiciona um espaçamento abaixo do cabeçalho */
 }
 
+/* Estilo do título principal no cabeçalho */
 header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: 2.5rem; /* Define o tamanho da fonte */
+    font-weight: bold; /* Aplica negrito */
 }
 
+/* Estilos das seções do conteúdo */
 section {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
-    border-radius: 10px;
+    margin-bottom: 30px; /* Espaçamento entre as seções */
+    padding: 20px; /* Espaço interno em todas as direções dentro da seção */
+    background-color: #f4f4f4; /* Cor de fundo cinza claro para as seções */
+    color: #333; /* Define a cor do texto como cinza escuro */
+    border-radius: 10px; /* Arredonda os cantos das seções */
 }
 
+/* Estilo dos títulos (h2) dentro das seções */
 section h2 {
-    font-size: 3rem;
-    margin-bottom: 15px;
+    font-size: 3rem; /* Define o tamanho da fonte dos títulos */
+    margin-bottom: 15px; /* Adiciona espaçamento abaixo dos títulos */
 }
 
+/* Estilo dos parágrafos (p) dentro das seções */
 section p {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: justify;
+    font-size: 2rem; /* Define o tamanho da fonte dos parágrafos */
+    margin-bottom: 20px; /* Espaçamento abaixo dos parágrafos */
+    text-align: justify; /* Justifica o texto para alinhamento simétrico nas bordas */
 }
 
+/* Estilo das imagens */
 img {
-    display: block;
-    max-width: 70%;
-    height: auto;
-    margin: 20px 0;
-    border-radius: 8px;
+    display: block; /* Exibe a imagem como um bloco (sem quebra de linha ao lado) */
+    max-width: 70%; /* Define a largura máxima como 70% do elemento pai */
+    height: auto; /* Ajusta automaticamente a altura para manter a proporção */
+    margin: 20px 0; /* Espaçamento vertical ao redor da imagem */
+    border-radius: 8px; /* Arredonda as bordas da imagem */
 }
 
 /* Sidebar (menu de navegação) fixo à direita */
 #nav-container {
     position: fixed; /* Fixa o menu à direita da tela */
-    top: 20px;
-    right: 20px;
-    background-color: #0288d1;
-    padding: 20px;
-    width: 200px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 20px; /* Distância do topo da janela */
+    right: 20px; /* Distância do lado direito da janela */
+    background-color: #0288d1; /* Cor de fundo azul para o menu */
+    padding: 20px; /* Espaço interno dentro do menu */
+    width: 200px; /* Define uma largura fixa para o menu */
+    border-radius: 8px; /* Arredonda as bordas do menu */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra ao redor do menu */
 }
 
+/* Estilo dos links dentro do menu de navegação */
 #nav-container a {
-    color: #fff;
-    display: block;
-    margin: 10px 0;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
+    color: #fff; /* Define a cor dos links como branco */
+    display: block; /* Exibe cada link em uma nova linha */
+    margin: 10px 0; /* Espaçamento entre os links */
+    text-decoration: none; /* Remove o sublinhado dos links */
+    font-weight: bold; /* Define a fonte dos links como negrito */
+    font-size: 1.2rem; /* Tamanho da fonte dos links */
 }
 
+/* Estilo de hover para os links no menu */
 #nav-container a:hover {
-    color: #ffeb3b; /* Cor ao passar o mouse */
+    color: #ffeb3b; /* Cor de destaque para os links quando o mouse passa por cima */
 }
 
-/* Footer */
+/* Footer (rodapé) */
 footer {
-    text-align: center;
-    background-color: #0288d1;
-    color: #fff;
-    padding: 10px;
-    margin-top: 30px;
+    text-align: center; /* Centraliza o texto no rodapé */
+    background-color: #0288d1; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto como branco */
+    padding: 10px; /* Espaço interno no rodapé */
+    margin-top: 30px; /* Espaçamento acima do rodapé */
 }
 
 footer p {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Tamanho da fonte do texto no rodapé */
 }
