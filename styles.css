@@ -1,8 +1,8 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
     scroll-behavior: smooth;
     background: linear-gradient(to right, #64b5f6, #01579b); /* Gradiente de azul claro para azul escuro */
     padding-left: 2cm; /* espaçamento de 2 cm à esquerda */
@@ -12,8 +12,14 @@ header {
     background-color: #0288d1; /* cor do cabeçalho */
     color: #fff;
     padding: 20px;
-    text-align: center;
-    font-weight: bold; /* título em negrito */
+    text-align: center; /* Centraliza o conteúdo dentro do cabeçalho */
+}
+
+header img {
+    width: 900px;  /* Largura de 15px */
+    height: 900px; /* Altura de 15px */
+    margin-top: 10px; /* Espaçamento acima da imagem */
+    object-fit: contain; /* Garante que a imagem se ajuste sem distorção */
 }
 
 nav {
@@ -84,4 +90,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .identado {
     text-align: justify;
+}
+
+.comment-section {
+    margin-top: 30px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
 }
