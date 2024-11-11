@@ -2,7 +2,6 @@
 * {
     margin: 0; /* Remove as margens padrão de todos os elementos */
     padding: 0; /* Remove o preenchimento padrão de todos os elementos */
-    box-sizing: border-box; /* Inclui as bordas e o preenchimento no cálculo da largura e altura total do elemento */
 }
 
 /* Estilo dos títulos h2 */
@@ -39,7 +38,7 @@ header h1 {
 section {
     margin-bottom: 30px; /* Espaçamento entre as seções */
     padding: 20px; /* Espaço interno em todas as direções dentro da seção */
-    background-color: #f4f4f4; /* Cor de fundo cinza claro para as seções */
+    background-color: #FFFFFF; /* Cor de fundo cinza claro para as seções */
     color: #333; /* Define a cor do texto como cinza escuro */
     border-radius: 10px; /* Arredonda os cantos das seções */
 }
