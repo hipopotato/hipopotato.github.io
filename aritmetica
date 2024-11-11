@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <title>Aritmética</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+
+    <!-- Cabeçalho -->
+    <header class="main-header">
         <h1>Aritmética</h1>
         <p>Aqui você encontra materiais relacionados à aritmética estudados no Profmat.</p>
     </header>
 
-    <section>
-        <h2>Seção 1</h2>
+    <!-- Menu de Navegação -->
+    <section class="menu-navigation">
+        <h2>Menu de Navegação</h2>
+        <ul class="menu-list">
+            <li><a href="seção1.html">Seção 1</a></li>
+            <li><a href="seção2.html">Seção 2</a></li>
+            <li><a href="seção3.html">Seção 3</a></li>
+            <li><a href="seção4.html">Seção 4</a></li>
+        </ul>
     </section>
 
-    <section>
-        <h2>Seção 2</h2>
-    </section>
-
-    <section>
-        <h2>Seção 3</h2>
-    </section>
-
-    <section>
-        <h2>Seção 4</h2>
-    </section>
-
+    <!-- Botão para voltar ao início -->
     <footer>
         <button onclick="window.location.href='index.html'">Voltar para o Início</button>
     </footer>
+
 </body>
 </html>
