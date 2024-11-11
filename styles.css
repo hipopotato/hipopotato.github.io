@@ -4,7 +4,8 @@ body {
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    background-color: #e0f7fa; /* fundo azul claro */
+    background: linear-gradient(to right, #64b5f6, #01579b); /* Gradiente de azul claro para azul escuro */
+    padding-left: 2cm; /* espaçamento de 2 cm à esquerda */
 }
 
 header {
@@ -73,6 +74,12 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px;
+}
+
+/* Títulos em negrito e azul escuro */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    color: #01579b; /* azul escuro */
 }
 
 .identado {
