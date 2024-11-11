@@ -1,99 +1,34 @@
-/* Definições globais */
-* {
-    margin: 0;
-    padding: 0;
-
-}
-
-/* Estilo geral */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f7f9fc; /* Fundo claro */
-    color: #333; /* Cor de texto principal */
-    padding: 20px;
-    line-height: 1.6;
-}
-/* Estilo do cabeçalho */
-header {
+/* Estilo do menu de navegação */
+nav {
     background-color: #d1e9ff; /* Fundo azul claro */
-    color: #013840; /* Título azul petróleo */
-    text-align: center;
+    color: #013840; /* Cor do título */
     padding: 20px;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-/* Estilo das seções */
-section {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff; /* Fundo branco para contraste */
-    color: #333;
     border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
+    margin-bottom: 20px; /* Espaço abaixo do menu */
+    text-align: center;
 }
 
-section h2 {
-    font-size: 1.5rem;
+nav h2 {
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #01579b; /* Título com realce em azul */
-    margin-bottom: 10px;
-}
-
-section p {
-    font-size: 1rem;
+    color: #01579b; /* Título em azul mais forte */
     margin-bottom: 15px;
-    text-align: justify;
 }
 
-/* Estilo das imagens */
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    margin: 15px 0;
-    border-radius: 6px;
-}
-
-/* Sidebar de navegação fixa */
-#nav-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #d1e9ff; /* Azul claro para destaque */
-    padding: 15px;
-    width: 180px;
-    border-radius: 6px;
-    box-shadow: 1 2px 4px rgba(0, 0, 0, 0.1);
-    list-style-type: none; 
-}
-
-#nav-container a {
+nav a {
     color: #013840; /* Links em azul petróleo */
     display: block;
-    margin: 8px 0;
-    text-decoration: none;
-    font-weight: bold;
     font-size: 1rem;
-    list-style-type: none; 
-}
-
-#nav-container a:hover {
-    color: #0288d1; /* Destaque ao passar o mouse */
-}
-
-/* Estilo do rodapé */
-footer {
-    text-align: center;
-    background-color: #d1e9ff;
-    color: #333;
+    text-decoration: none;
     padding: 10px;
-    margin-top: 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: background-color 0.3s, color 0.3s; /* Efeito de transição suave */
 }
 
-footer p {
-    font-size: 0.8rem;
+nav a:hover {
+    background-color: #0288d1; /* Fundo azul mais escuro ao passar o mouse */
+    color: #fff; /* Cor do texto ao passar o mouse */
 }
