@@ -135,7 +135,7 @@ footer h1 {
     font-weight: bold;
     color: #013840;
     margin-bottom: 15px;
-    background-color: #00bcd4; /* Fundo no título */
+    background-color: #00bcd4; /* Fundo igual ao título do cabeçalho */
     padding: 10px;
     border-radius: 5px;
 }
