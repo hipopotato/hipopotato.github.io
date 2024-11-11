@@ -28,7 +28,15 @@ header {
     width: 100%;
     margin-bottom: 30px;
 }
-
+section {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 30px;
+}
 header h1 {
     font-size: 2em; /* Diminui o tamanho do título */
     font-weight: bold;
