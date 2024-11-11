@@ -13,7 +13,12 @@ body {
     padding: 20px;
     line-height: 1.6;
 }
-
+header img {
+            width: 900px;  /* Largura de 15px */
+            height: 900px; /* Altura de 15px */
+            margin-top: 10px; /* Espaçamento acima da imagem */
+            object-fit: contain; /* Garante que a imagem se ajuste sem distorção */
+        }
 /* Estilo do cabeçalho */
 header {
     background-color: #d1e9ff; /* Fundo azul claro */
