@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aritmética</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Aritmética</h1>
+        <p>Aqui você encontra materiais relacionados à aritmética estudados no Profmat.</p>
+    </header>
 
+    <section>
+        <h2>Seção 1</h2>
+    </section>
+
+    <section>
+        <h2>Seção 2</h2>
+    </section>
+
+    <section>
+        <h2>Seção 3</h2>
+    </section>
+
+    <section>
+        <h2>Seção 4</h2>
+    </section>
+
+    <footer>
+        <button onclick="window.location.href='index.html'">Voltar para o Início</button>
+    </footer>
+</body>
+</html>
