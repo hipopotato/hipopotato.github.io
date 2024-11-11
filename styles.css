@@ -1,104 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
-*{
+/* Definições globais */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
-nav{
-    background-color: #18929D;
-    padding: 10px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-nav .logo a{
-    text-decoration: none;
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #64b5f6, #01579b); /* Gradiente de azul */
     color: #fff;
-    font-size: 35px;
-    font-weight: 600;
+    line-height: 1.6;
+    padding: 20px;
 }
-nav ul{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 10px;
-}
-nav li{
-    margin-left: 7px;
-}
-nav li a{
-    text-decoration: none;
+
+header {
+    background-color: #0288d1; /* Cabeçalho azul */
     color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-nav li a:hover{
-    background-color: white;
-    color: black;
-}
-.banner{
-    height: 100vh;
-    background: linear-gradient( rgba(0,0,0,0.281), rgba(0,0,0,0.308)),url('background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
 }
-.texto .titulo{
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+    border-radius: 8px;
+}
+
+section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+section p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+footer {
+    text-align: center;
+    background-color: #0288d1;
     color: #fff;
-    font-size: 60px;
-    font-weight: 600;
-}
-.texto .sub_titulo{
-    color: #fff;
-    font-size: 58px;
-    font-weight: 600;
-}
-.texto .botoes{
+    padding: 10px;
     margin-top: 30px;
 }
-.texto .botoes button{
-    height: 55px;
-    width: 170px;
-    border-radius: 5px;
-    border: 0;
-    margin: 0 10px;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 0 10px;
-    cursor: pointer;
-    outline: none;
-    transition: 0.3s;
-}
-.texto .botoes button.n-overlay{
-    color: white;
-    background: none;
-    border: 2px solid white;
-}
-.texto .botoes button.n-overlay:hover{
-    color: black;
-    background-color: white;
-}
-.texto .botoes button.overlay{
-    background: white;
-    color: black;
-    animation: vibrar 0.5s ease-in-out infinite both;
-}
-@keyframes vibrar {
-    0%{
-        transform: scale(1);
-    }
-    50%{
-        transform: scale(1.1);
-    }
-    100%{
-        transform: scale(1);
-    }
+
+footer p {
+    font-size: 0.9rem;
 }
