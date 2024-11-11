@@ -150,3 +150,35 @@ footer {
         width: 100%;
     }
 }
+
+/* Estilo para os links dentro da página */
+.section-navigation {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.section-navigation .menu-list {
+    list-style: none;
+    padding: 0;
+}
+
+.section-navigation .menu-list li {
+    margin: 12px 0;
+}
+
+.section-navigation .menu-list a {
+    text-decoration: none;
+    color: #013840; /* Cor do texto */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #f0f0f0; /* Fundo claro */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    font-size: 1.2em; /* Tamanho da fonte */
+}
+
+.section-navigation .menu-list a:hover {
+    background-color: #0288d1; /* Fundo azul ao passar o mouse */
+    color: white; /* Texto branco no hover */
+}
