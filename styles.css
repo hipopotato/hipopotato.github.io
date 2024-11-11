@@ -4,7 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+h2 {
+            color: #013840; /* Azul petróleo */
+            font-family: 'Roboto', sans-serif;
+        }
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to right, #c5e3fa, #01579b); /* Gradiente de azul */
