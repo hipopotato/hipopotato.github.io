@@ -58,7 +58,7 @@ section p {
 /* Estilo das imagens */
 img {
     display: block;
-    max-width: 5%;
+    max-width: 100%;
     height: auto;
     margin: 15px 0;
     border-radius: 6px;
