@@ -97,19 +97,8 @@ header img {
     color: white; /* Texto branco no hover */
 }
 
-/* Estilo para o conteúdo principal */
-.content {
-    background-color: #fff;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-}
-
 /* Estilo para o botão de voltar */
-.back-button {
+footer button {
     background-color: #00bcd4; /* Cor de fundo igual ao título */
     color: white; /* Texto branco */
     font-size: 1.2em;
@@ -123,7 +112,7 @@ header img {
     margin-top: 30px; /* Espaço superior para o botão */
 }
 
-.back-button:hover {
+footer button:hover {
     background-color: #0288d1; /* Cor mais escura ao passar o mouse */
 }
 
@@ -138,24 +127,6 @@ footer {
     margin-top: 30px; /* Garantindo espaço entre o conteúdo e o footer */
 }
 
-footer h1 {
-    font-size: 2em; /* Diminui o tamanho do título no footer */
-    font-weight: bold;
-    color: #013840;
-    margin-bottom: 15px;
-    background-color: #00bcd4; /* Fundo igual ao título do cabeçalho */
-    padding: 10px;
-    border-radius: 5px;
-}
-
-footer iframe {
-    width: 100%;
-    max-width: 640px;
-    height: 470px;
-    margin: 0 auto;
-    display: block;
-}
-
 /* Responsividade */
 @media (max-width: 768px) {
     body {
@@ -167,17 +138,8 @@ footer iframe {
         max-width: 250px;
     }
 
-    .menu-navigation, .content, footer {
+    .menu-navigation, footer {
         padding: 15px;
         width: 100%;
     }
-
-    footer iframe {
-        height: 400px;
-    }
-}
-
-/* Estilo para a última seção */
-section:last-of-type {
-    margin-bottom: 30px; /* Espaço entre a última seção e o botão */
 }
