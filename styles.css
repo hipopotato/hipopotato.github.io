@@ -1,10 +1,12 @@
+/* Definições de estilo */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #64b5f6, #01579b); /* Gradiente de azul claro para azul escuro */
+    color: #fff;
     max-width: 800px;
     margin: auto;
     padding: 20px;
     scroll-behavior: smooth;
-    background: linear-gradient(to right, #64b5f6, #01579b); /* Gradiente de azul claro para azul escuro */
     padding-left: 2cm; /* espaçamento de 2 cm à esquerda */
 }
 
@@ -16,8 +18,8 @@ header {
 }
 
 header img {
-    width: 900px;  /* Largura de 15px */
-    height: 900px; /* Altura de 15px */
+    width: 100%; /* Largura da imagem */
+    height: auto; /* Altura ajustável */
     margin-top: 10px; /* Espaçamento acima da imagem */
     object-fit: contain; /* Garante que a imagem se ajuste sem distorção */
 }
