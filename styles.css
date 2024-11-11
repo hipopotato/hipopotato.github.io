@@ -174,4 +174,12 @@ footer iframe {
 .back-button:hover {
     background-color: #0288d1; /* Cor mais escura ao passar o mouse */
 }
+section:last-of-type {
+    margin-bottom: 30px; /* Espaço entre a última seção e o botão */
+}
+/* Estilo para o footer */
+footer {
+    padding-top: 30px; /* Espaço entre o conteúdo e o botão */
+}
+
 
