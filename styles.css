@@ -108,7 +108,26 @@ header img {
     max-width: 800px;
 }
 
-/* Estilo para o formulário de feedback */
+/* Estilo para o botão de voltar */
+.back-button {
+    background-color: #00bcd4; /* Cor de fundo igual ao título */
+    color: white; /* Texto branco */
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin-top: 30px; /* Espaço superior para o botão */
+}
+
+.back-button:hover {
+    background-color: #0288d1; /* Cor mais escura ao passar o mouse */
+}
+
+/* Estilo para o footer */
 footer {
     text-align: center;
     background-color: #fff;
@@ -116,7 +135,7 @@ footer {
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    margin-bottom: 30px;
+    margin-top: 30px; /* Garantindo espaço entre o conteúdo e o footer */
 }
 
 footer h1 {
@@ -156,30 +175,9 @@ footer iframe {
     footer iframe {
         height: 400px;
     }
-}/* Estilo para o botão de voltar */
-.back-button {
-    background-color: #00bcd4; /* Cor de fundo igual ao título */
-    color: white; /* Texto branco */
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    margin-top: 20px;
 }
 
-.back-button:hover {
-    background-color: #0288d1; /* Cor mais escura ao passar o mouse */
-}
+/* Estilo para a última seção */
 section:last-of-type {
     margin-bottom: 30px; /* Espaço entre a última seção e o botão */
 }
-/* Estilo para o footer */
-footer {
-    padding-top: 30px; /* Espaço entre o conteúdo e o botão */
-}
-
-
