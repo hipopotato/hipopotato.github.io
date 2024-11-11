@@ -53,6 +53,32 @@ img {
     border-radius: 8px;
 }
 
+/* Sidebar (menu de navegação) fixo à direita */
+#nav-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #0288d1;
+    padding: 20px;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#nav-container a {
+    color: #fff;
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#nav-container a:hover {
+    color: #ffeb3b; /* cor ao passar o mouse */
+}
+
+/* Footer */
 footer {
     text-align: center;
     background-color: #0288d1;
