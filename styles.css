@@ -55,7 +55,7 @@ img {
 
 /* Sidebar (menu de navegação) fixo à direita */
 #nav-container {
-    position: fixed;
+    position: relative;
     top: 20px;
     right: 20px;
     background-color: #0288d1;
