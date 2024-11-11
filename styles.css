@@ -53,7 +53,7 @@ section p {
 /* Estilo das imagens */
 img {
     display: block;
-    max-width: 100%;
+    max-width: 20%;
     height: auto;
     margin: 15px 0;
     border-radius: 6px;
@@ -68,7 +68,7 @@ img {
     padding: 15px;
     width: 180px;
     border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 1 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #nav-container a {
