@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #64b5f6, #01579b); /* Gradiente de azul */
+    background: linear-gradient(to right, #c5e3fa, #01579b); /* Gradiente de azul */
     color: #fff;
     line-height: 1.6;
     padding: 20px;
@@ -27,15 +27,14 @@ header h1 {
 }
 
 section {
-    margin-bottom: 30px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
-    border-radius: 8px;
+    margin-bottom: 30px; /* Adiciona um espaço de 30px abaixo de cada seção, separando-a da próxima */
+    padding: 20px; /* Adiciona um espaço interno de 20px em todas as direções dentro da seção, entre o conteúdo e a borda */
+    background-color: #f4f4f4; /* Define a cor de fundo da seção em um tom claro de cinza (#f4f4f4) */
+    color: #333; /* Define a cor do texto como um tom escuro de cinza (#333), que é uma alternativa suave ao preto puro */
+    border-radius: 10px; /* Arredonda os cantos da borda da seção com um raio de 10px, deixando-os menos angulares */
 }
-
 section h2 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 15px;
 }
 
