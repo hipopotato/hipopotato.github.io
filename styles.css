@@ -13,7 +13,8 @@ body {
     max-width: 1200px;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Estilo para o cabeçalho */
@@ -50,59 +51,7 @@ header img {
     object-fit: contain;
 }
 
-/* Estilo para o menu lateral */
-.side-nav {
-    width: 220px;
-    background-color: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 20px;
-    left: 0;
-    height: 100%;
-    z-index: 100;
-}
-
-.side-nav h2 {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #013840;
-    margin-bottom: 10px;
-}
-
-.side-nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.side-nav ul li {
-    margin: 12px 0;
-}
-
-.side-nav a {
-    text-decoration: none;
-    color: #013840;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #f0f0f0;
-    display: block;
-    transition: background-color 0.3s ease;
-}
-
-.side-nav a:hover {
-    background-color: #0288d1; /* Fundo azul mais escuro ao passar o mouse */
-    color: #fff;
-}
-
 /* Estilo para o conteúdo principal */
-.main-content {
-    margin-left: 240px; /* Deixando espaço para o menu lateral */
-    width: 100%;
-}
-
-/* Estilo para o conteúdo das páginas */
 .content {
     background-color: #fff;
     padding: 20px;
@@ -110,21 +59,6 @@ header img {
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 75%;
-}
-
-/* Estilo para os exercícios */
-.exercise {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.exercise h3 {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #0288d1;
 }
 
 /* Estilo para o formulário de feedback */
