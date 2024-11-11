@@ -1,34 +1,118 @@
-/* Estilo do menu de navegação */
-nav {
-    background-color: #d1e9ff; /* Fundo azul claro */
-    color: #013840; /* Cor do título */
+/* Resetando estilos e definindo fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #81cfe0, #00bcd4); /* Gradiente azul de fundo */
+    color: #013840; /* Cor do texto em petróleo */
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Estilo para o cabeçalho */
+header {
+    text-align: center;
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve para destaque */
-    margin-bottom: 20px; /* Espaço abaixo do menu */
-    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #013840;
+    margin-bottom: 15px;
+    background-color: #00bcd4; /* Fundo no título */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+header p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+header img {
+    width: 300px;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    object-fit: contain;
+}
+
+/* Estilo para o menu de navegação */
+nav {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 nav h2 {
-    font-size: 1.8rem;
+    font-size: 1.8em;
     font-weight: bold;
-    color: #01579b; /* Título em azul mais forte */
-    margin-bottom: 15px;
+    color: #013840;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 12px 0;
 }
 
 nav a {
-    color: #013840; /* Links em azul petróleo */
-    display:inline-block;
-    font-size: 1rem;
     text-decoration: none;
+    color: #013840;
+    font-weight: bold;
     padding: 10px;
     border-radius: 4px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    transition: background-color 0.3s, color 0.3s; /* Efeito de transição suave */
+    background-color: #f0f0f0;
+    display: block;
+    transition: background-color 0.3s ease;
 }
 
 nav a:hover {
     background-color: #0288d1; /* Fundo azul mais escuro ao passar o mouse */
-    color: #fff; /* Cor do texto ao passar o mouse */
+    color: #fff;
+}
+
+/* Estilo para a seção de conteúdo */
+.content {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para o formulário de feedback */
+footer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #013840;
+    margin-bottom: 15px;
+}
+
+footer iframe {
+    width: 100%;
+    max-width: 640px;
+    height: 470px;
+    margin: 0 auto;
+    display: block;
 }
