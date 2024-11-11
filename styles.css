@@ -1,159 +1,35 @@
-/* Resetando estilos e definindo fontes */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Geometria</h1>
+        <p>Aqui você encontra materiais relacionados à geometria estudados no Profmat.</p>
+    </header>
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #81cfe0, #00bcd4); /* Gradiente azul de fundo */
-    color: #013840; /* Cor do texto em petróleo */
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1em; /* Diminui o tamanho da fonte principal */
-}
+    <section>
+        <h2>Seção 1</h2>
+    </section>
 
-/* Estilo para o cabeçalho */
-header {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    margin-bottom: 30px;
-}
+    <section>
+        <h2>Seção 2</h2>
+    </section>
 
-header h1 {
-    font-size: 2em; /* Diminui o tamanho do título */
-    font-weight: bold;
-    color: #013840;
-    margin-bottom: 15px;
-    background-color: #00bcd4; /* Fundo no título */
-    padding: 10px;
-    border-radius: 5px;
-}
+    <section>
+        <h2>Seção 3</h2>
+    </section>
 
-header p {
-    font-size: 1em; /* Diminui o tamanho da descrição */
-    margin-bottom: 20px;
-}
+    <section>
+        <h2>Seção 4</h2>
+    </section>
 
-header img {
-    width: 300px;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    object-fit: contain;
-}
-
-/* Estilo para o menu de navegação */
-.menu-navigation {
-    background-color: #ffffff; /* Fundo branco */
-    padding: 20px;
-    margin-top: 30px; /* Espaço acima do menu */
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-}
-
-.menu-navigation h2 {
-    font-size: 2.2em; /* Aumenta o tamanho do título do menu */
-    font-weight: bold;
-    color: #013840; /* Cor do título */
-    margin-bottom: 20px;
-}
-
-.menu-list {
-    list-style: none;
-    padding: 0;
-}
-
-.menu-list li {
-    margin: 12px 0;
-}
-
-.menu-list a {
-    text-decoration: none;
-    color: #013840; /* Cor do texto */
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 4px;
-    background-color: #f0f0f0; /* Fundo claro */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: inline-block;
-    font-size: 1.2em; /* Aumenta a fonte do menu */
-}
-
-.menu-list a:hover {
-    background-color: #0288d1; /* Fundo azul ao passar o mouse */
-    color: white; /* Texto branco no hover */
-}
-
-/* Estilo para o conteúdo principal */
-.content {
-    background-color: #fff;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-}
-
-/* Estilo para o formulário de feedback */
-footer {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-footer h1 {
-    font-size: 2em; /* Diminui o tamanho do título no footer */
-    font-weight: bold;
-    color: #013840;
-    margin-bottom: 15px;
-    background-color: #00bcd4; /* Fundo igual ao título do cabeçalho */
-    padding: 10px;
-    border-radius: 5px;
-}
-
-footer iframe {
-    width: 100%;
-    max-width: 640px;
-    height: 470px;
-    margin: 0 auto;
-    display: block;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    header img {
-        width: 100%;
-        max-width: 250px;
-    }
-
-    .menu-navigation, .content, footer {
-        padding: 15px;
-        width: 100%;
-    }
-
-    footer iframe {
-        height: 400px;
-    }
-}
+    <footer>
+        <button onclick="window.location.href='index.html'">Voltar para o Início</button>
+    </footer>
+</body>
+</html>
