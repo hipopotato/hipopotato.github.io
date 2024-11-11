@@ -18,7 +18,7 @@ nav h2 {
 
 nav a {
     color: #013840; /* Links em azul petróleo */
-    display: relative;
+    display: block;
     font-size: 1rem;
     text-decoration: none;
     padding: 10px;
