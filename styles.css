@@ -1,37 +1,43 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    background-color: #e0f7fa; /* fundo azul claro */
 }
 
 header {
-    background-color: #333;
+    background-color: #0288d1; /* cor do cabeçalho */
     color: #fff;
     padding: 20px;
     text-align: center;
+    font-weight: bold; /* título em negrito */
 }
 
 nav {
     margin-top: 10px;
+    background-color: #01579b; /* cor do menu de navegação */
+    text-align: center;
 }
 
 nav a {
     color: #fff;
     margin: 0 15px;
     text-decoration: none;
+    font-weight: bold; /* título do menu em negrito */
     transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #ffa500;
+    color: #ffeb3b; /* cor ao passar o mouse */
 }
 
 .section {
     padding: 60px 20px;
     margin: 20px 0;
     min-height: 100vh;
+    text-align: justify; /* texto justificado */
 }
 
 #intro {
@@ -63,12 +69,12 @@ nav a:hover {
 }
 
 footer {
-    background-color: #333;
+    background-color: #0288d1; /* cor do rodapé */
     color: #fff;
     text-align: center;
     padding: 10px;
 }
 
 .identado {
-    text-align:justify
+    text-align: justify;
 }
