@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hipopotato.github.io/sitemap.xml
