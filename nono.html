@@ -6,34 +6,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Materiais Complementares - 9º Ano</title>
-    <script>
-        function getCookie(name) {
-            let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
-            return matches ? decodeURIComponent(matches[1]) : null;
-        }
-        
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                let date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
-        }
-        
-        function likeSection(id) {
-            if (!getCookie(id)) {
-                let likeCount = localStorage.getItem(id) || 0;
-                likeCount++;
-                localStorage.setItem(id, likeCount);
-                document.getElementById(id).innerText = likeCount;
-                setCookie(id, "liked", 365);
-            } else {
-                alert("Você já curtiu esta seção!");
-            }
-        }
-    </script>
 </head>
 <body>
     <header class="main-header">
@@ -42,44 +14,68 @@
         <a href="https://drive.google.com/drive/folders/SEU-LINK-AQUI" target="_blank">📖 Apostilas e Resumos</a><br>
         <nav class="section-navigation">
             <ul class="menu-list">
-                <li><a href="#capitulo1">Capítulo 1: Números e Expressões</a></li>
-                <li><a href="#capitulo2">Capítulo 2: Equações e Funções</a></li>
-                <li><a href="#capitulo3">Capítulo 3: Geometria</a></li>
-                <li><a href="#capitulo4">Capítulo 4: Estatística e Probabilidade</a></li>
+                <li><a href="#topico1">Tópico 1</a></li>
+                <li><a href="#topico2">Tópico 2</a></li>
+                <li><a href="#topico3">Tópico 3</a></li>
+                <li><a href="#topico4">Tópico 4</a></li>
+                <li><a href="#topico5">Tópico 5</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="capitulo1">
-        <h2>Capítulo 1: Números e Expressões 🔢</h2>
-        <p>Conceitos fundamentais sobre números reais e expressões algébricas.</p>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">📜 Resumo Teórico</a><br>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">📝 Lista de Exercícios</a><br>
-        <button onclick="likeSection('likes1')">👍 Curtir</button> <span id="likes1">0</span> curtidas
+    <section id="topico1">
+        <h2>Tópico 1</h2>
+        <p>Descrição do Tópico 1...</p>
+        <h3>Dicas e Vídeos</h3>
+        <p>Links para vídeos e dicas...</p>
+        <h3>Sites Recomendados</h3>
+        <p>Links para sites úteis...</p>
+        <h3>Espaço para Dúvidas</h3>
+        <textarea placeholder="Escreva sua dúvida aqui..."></textarea>
     </section>
 
-    <section id="capitulo2">
-        <h2>Capítulo 2: Equações e Funções ✏️</h2>
-        <p>Exploração de equações e suas aplicações.</p>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">📚 Resumo</a><br>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">📖 Exercícios</a><br>
-        <button onclick="likeSection('likes2')">👍 Curtir</button> <span id="likes2">0</span> curtidas
+    <section id="topico2">
+        <h2>Tópico 2</h2>
+        <p>Descrição do Tópico 2...</p>
+        <h3>Dicas e Vídeos</h3>
+        <p>Links para vídeos e dicas...</p>
+        <h3>Sites Recomendados</h3>
+        <p>Links para sites úteis...</p>
+        <h3>Espaço para Dúvidas</h3>
+        <textarea placeholder="Escreva sua dúvida aqui..."></textarea>
     </section>
 
-    <section id="capitulo3">
-        <h2>Capítulo 3: Geometria 📐</h2>
-        <p>Estudo de figuras planas e espaciais.</p>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">📏 Resumo Geometria Plana</a><br>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">🔺 Resumo Geometria Espacial</a><br>
-        <button onclick="likeSection('likes3')">👍 Curtir</button> <span id="likes3">0</span> curtidas
+    <section id="topico3">
+        <h2>Tópico 3</h2>
+        <p>Descrição do Tópico 3...</p>
+        <h3>Dicas e Vídeos</h3>
+        <p>Links para vídeos e dicas...</p>
+        <h3>Sites Recomendados</h3>
+        <p>Links para sites úteis...</p>
+        <h3>Espaço para Dúvidas</h3>
+        <textarea placeholder="Escreva sua dúvida aqui..."></textarea>
     </section>
 
-    <section id="capitulo4">
-        <h2>Capítulo 4: Estatística e Probabilidade 🎲</h2>
-        <p>Análise de dados e conceitos de probabilidade.</p>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">📊 Resumo Estatística</a><br>
-        <a href="https://drive.google.com/file/d/SEU-LINK-AQUI/view?usp=drive_link" target="_blank">🎯 Resumo Probabilidade</a><br>
-        <button onclick="likeSection('likes4')">👍 Curtir</button> <span id="likes4">0</span> curtidas
+    <section id="topico4">
+        <h2>Tópico 4</h2>
+        <p>Descrição do Tópico 4...</p>
+        <h3>Dicas e Vídeos</h3>
+        <p>Links para vídeos e dicas...</p>
+        <h3>Sites Recomendados</h3>
+        <p>Links para sites úteis...</p>
+        <h3>Espaço para Dúvidas</h3>
+        <textarea placeholder="Escreva sua dúvida aqui..."></textarea>
+    </section>
+
+    <section id="topico5">
+        <h2>Tópico 5</h2>
+        <p>Descrição do Tópico 5...</p>
+        <h3>Dicas e Vídeos</h3>
+        <p>Links para vídeos e dicas...</p>
+        <h3>Sites Recomendados</h3>
+        <p>Links para sites úteis...</p>
+        <h3>Espaço para Dúvidas</h3>
+        <textarea placeholder="Escreva sua dúvida aqui..."></textarea>
     </section>
 
     <footer>
