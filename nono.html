@@ -7,11 +7,31 @@
     <link rel="stylesheet" href="styles.css">
     <title>Materiais Complementares - 9º Ano</title>
     <script>
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+            return matches ? decodeURIComponent(matches[1]) : null;
+        }
+        
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(value) + expires + "; path=/";
+        }
+        
         function likeSection(id) {
-            let likeCount = localStorage.getItem(id) || 0;
-            likeCount++;
-            localStorage.setItem(id, likeCount);
-            document.getElementById(id).innerText = likeCount;
+            if (!getCookie(id)) {
+                let likeCount = localStorage.getItem(id) || 0;
+                likeCount++;
+                localStorage.setItem(id, likeCount);
+                document.getElementById(id).innerText = likeCount;
+                setCookie(id, "liked", 365);
+            } else {
+                alert("Você já curtiu esta seção!");
+            }
         }
     </script>
 </head>
