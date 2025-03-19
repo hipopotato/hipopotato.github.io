@@ -201,3 +201,35 @@ footer {
         height: 100%; /* Mantém a altura proporcional */
     }
 
+section {
+    font-family: Arial, sans-serif; /* Fonte mais leve */
+    line-height: 1.6; /* Aumenta o espaçamento entre as linhas */
+    margin-bottom: 20px; /* Espaçamento após a seção */
+}
+
+h2, h3 {
+    margin-bottom: 15px; /* Espaçamento após os títulos */
+    color: #333; /* Cor mais suave para os títulos */
+}
+
+p {
+    margin-bottom: 15px; /* Espaço entre os parágrafos */
+    font-size: 1.1em; /* Tamanho da fonte um pouco maior para facilitar a leitura */
+    color: #444; /* Cor mais suave para o texto */
+}
+
+a {
+    color: #1e90ff; /* Cor para o link */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Efeito ao passar o mouse */
+}
+
+img {
+    max-width: 100%; /* Para garantir que a imagem se ajuste ao tamanho da tela */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-top: 20px; /* Margem acima da imagem */
+    margin-bottom: 20px; /* Margem abaixo da imagem */
+}
