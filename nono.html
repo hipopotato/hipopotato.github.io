@@ -8,6 +8,15 @@
     <title>Materiais Complementares - 9º Ano</title>
 </head>
 <body>
+     <div id="navbar"></div> <!-- Aqui será inserida a barra de navegação -->
+
+    <script>
+        // Carregar a navegação automaticamente
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
     <header class="main-header">
         <h1>Materiais Complementares - 9º Ano 📚✨</h1>
         <p>Explore conteúdos de forma interativa e divertida! 🚀</p>
