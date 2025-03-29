@@ -71,5 +71,65 @@ p {
     color: #444;
     line-height: 1.6; /* Espaçamento entre as linhas igual ao de header */
 }
+/* Estilo para a barra de navegação fixa */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000; /* Garantir que fique acima de outros elementos */
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
-/* Outras partes do código continuam iguais */
+.navbar nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px; /* Limitar largura para não ocupar toda a tela */
+}
+
+.navbar-item {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.navbar-item:hover {
+    background-color: #ffcc00;
+    color: #333;
+}
+
+/* Ajustes de conteúdo */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    padding-top: 50px; /* Garantir que o conteúdo não fique escondido atrás da barra fixa */
+}
+
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+footer {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+#topo {
+    padding-top: 50px; /* Garantir que o título fique abaixo da barra de navegação */
+}
