@@ -120,7 +120,13 @@ main {
 }
 
 h1, h2 {
-    color: #333;
+    font-size: 2em;
+    font-weight: bold;
+    color: #013840;
+    margin-bottom: 15px;
+    background-color: #00bcd4;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 footer {
