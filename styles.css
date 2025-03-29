@@ -213,7 +213,7 @@ p {
          width: 100%;  /* O vídeo ocupa 100% da largura do contêiner */
          height: 100%; /* Mantém a altura proporcional */
      }
- /* Barra de navegação fixa no topo */
+/* Barra de navegação fixa no topo */
 .top-nav {
     position: fixed;
     top: 0;
@@ -227,14 +227,16 @@ p {
 
 .top-nav ul {
     list-style: none;
-    display: flex;
-    justify-content: center;
+    display: flex; /* Coloca os itens em linha */
+    justify-content: center; /* Centraliza os links */
+    align-items: center; /* Alinha verticalmente */
     padding: 0;
     margin: 0;
 }
 
 .top-nav ul li {
-    margin: 0 15px;
+    display: inline-block; /* Faz com que os itens fiquem lado a lado */
+    margin: 0 15px; /* Espaçamento entre os links */
 }
 
 .top-nav ul li a {
@@ -250,36 +252,3 @@ p {
 .top-nav ul li a:hover {
     background-color: #0288d1; /* Azul mais escuro no hover */
 }
-
- section {
-     font-family: Arial, sans-serif; /* Fonte mais leve */
-     line-height: 1.6; /* Aumenta o espaçamento entre as linhas */
-     margin-bottom: 20px; /* Espaçamento após a seção */
- }
- 
- h2, h3 {
-     margin-bottom: 15px; /* Espaçamento após os títulos */
-     color: #333; /* Cor mais suave para os títulos */
- }
- 
- p {
-     margin-bottom: 15px; /* Espaço entre os parágrafos */
-     font-size: 1.1em; /* Tamanho da fonte um pouco maior para facilitar a leitura */
-     color: #444; /* Cor mais suave para o texto */
- }
- 
- a {
-     color: #1e90ff; /* Cor para o link */
-     text-decoration: none;
- }
- 
- a:hover {
-     text-decoration: underline; /* Efeito ao passar o mouse */
- }
- 
- img {
-     max-width: 100%; /* Para garantir que a imagem se ajuste ao tamanho da tela */
-     height: auto; /* Mantém a proporção da imagem */
-     margin-top: 20px; /* Margem acima da imagem */
-     margin-bottom: 20px; /* Margem abaixo da imagem */
- }
