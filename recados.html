@@ -8,6 +8,15 @@
     <title>Recados</title>
 </head>
 <body>
+     <div id="navbar"></div> <!-- Aqui será inserida a barra de navegação -->
+
+    <script>
+        // Carregar a navegação automaticamente
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
     <header class="main-header">
         <h1>Recadinhos e Lembretes  📚✨</h1>
         <p>Cada um de vocês tem um potencial único, capaz de alcançar grandes conquistas. A matemática é apenas uma das chaves para despertar esse poder e mostrar o quanto vocês são capazes de ir além!</p>
