@@ -73,65 +73,176 @@ p {
     line-height: 1.6;
 }
 
-/* Estilo para a barra de navegação fixa */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.navbar nav {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    max-width: 1200px; /* Limitar largura para não ocupar toda a tela */
-}
-
-.navbar-item {
-    text-decoration: none;
-    color: white;
-    padding: 8px 16px;
-    font-size: 14px;
-    transition: background-color 0.3s;
-}
-
-.navbar-item:hover {
-    background-color: #ffcc00;
-    color: #333;
-}
-
-/* Ajustes de conteúdo */
-main {
-    padding: 20px;
-}
-
-h1, h2 {
-    font-size: 2em;
-    font-weight: bold;
-    color: #013840;
-    margin-bottom: 15px;
-    background-color: #00bcd4;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-/* Estilo do rodapé */
-footer {
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    text-align: center;
-}
-
-/* Ajuste de topo */
-#topo {
-    padding-top: 50px;
-}
+.menu-navigation {
+     background-color: #ffffff; /* Fundo branco */
+     padding: 20px;
+     margin-top: 30px; /* Espaço acima do menu */
+     border-radius: 8px; /* Bordas arredondadas */
+     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+     text-align: center;
+     width: 100%;
+     max-width: 800px;
+ }
+ 
+ .menu-navigation h2 {
+     font-size: 2.2em; /* Aumenta o tamanho do título do menu */
+     font-weight: bold;
+     color: #013840; /* Cor do título */
+     margin-bottom: 20px;
+ }
+ 
+ .menu-list {
+     list-style: none; /* Remove os sinais de item */
+     padding: 0;
+ }
+ 
+ .menu-list li {
+     margin: 12px 0;
+ }
+ 
+ .menu-list a {
+     text-decoration: none;
+     color: #013840; /* Cor do texto */
+     font-weight: bold;
+     padding: 10px 20px;
+     border-radius: 4px;
+     background-color: #f0f0f0; /* Fundo claro */
+     transition: background-color 0.3s ease, color 0.3s ease;
+     display: inline-block;
+     font-size: 1.2em; /* Aumenta a fonte do menu */
+ }
+ 
+ .menu-list a:hover {
+     background-color: #0288d1; /* Fundo azul ao passar o mouse */
+     color: white; /* Texto branco no hover */
+ }
+ 
+ /* Estilo para o botão de voltar */
+ footer button {
+     background-color: #00bcd4; /* Cor de fundo igual ao título */
+     color: white; /* Texto branco */
+     font-size: 1.2em;
+     font-weight: bold;
+     padding: 10px 20px;
+     border-radius: 4px;
+     border: none;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+     display: inline-block;
+     margin-top: 30px; /* Espaço superior para o botão */
+ }
+ 
+ footer button:hover {
+     background-color: #0288d1; /* Cor mais escura ao passar o mouse */
+ }
+ 
+ /* Estilo para o footer */
+ footer {
+     text-align: center;
+     background-color: #fff;
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+     width: 100%;
+     margin-top: 30px; /* Garantindo espaço entre o conteúdo e o footer */
+ }
+ 
+ /* Responsividade */
+ @media (max-width: 768px) {
+     body {
+         padding: 10px;
+     }
+ 
+     header img {
+         width: 100%;
+         max-width: 250px;
+     }
+ 
+     .menu-navigation, footer {
+         padding: 15px;
+         width: 100%;
+     }
+ }
+ 
+ /* Estilo para os links dentro da página */
+ .section-navigation {
+     margin-top: 30px;
+     text-align: center;
+ }
+ 
+ .section-navigation .menu-list {
+     list-style: none; /* Remove os sinais de item */
+     padding: 0;
+ }
+ 
+ .section-navigation .menu-list li {
+     margin: 12px 0;
+ }
+ 
+ .section-navigation .menu-list a {
+     text-decoration: none;
+     color: #013840; /* Cor do texto */
+     font-weight: bold;
+     padding: 10px 20px;
+     border-radius: 4px;
+     background-color: #f0f0f0; /* Fundo claro */
+     transition: background-color 0.3s ease, color 0.3s ease;
+     display: inline-block;
+     font-size: 1.2em; /* Tamanho da fonte */
+ }
+ 
+ .section-navigation .menu-list a:hover {
+     background-color: #0288d1; /* Fundo azul ao passar o mouse */
+     color: white; /* Texto branco no hover */
+ }
+ 
+ 
+ 
+     .video-container {
+         position: relative;
+         padding-bottom: 56.25%; /* Proporção 16:9 */
+         height: 0;
+         overflow: hidden;
+         max-width: 100%; /* Limita a largura ao tamanho máximo da tela */
+     }
+ 
+     .video-container video {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;  /* O vídeo ocupa 100% da largura do contêiner */
+         height: 100%; /* Mantém a altura proporcional */
+     }
+ 
+ section {
+     font-family: Arial, sans-serif; /* Fonte mais leve */
+     line-height: 1.6; /* Aumenta o espaçamento entre as linhas */
+     margin-bottom: 20px; /* Espaçamento após a seção */
+ }
+ 
+ h2, h3 {
+     margin-bottom: 15px; /* Espaçamento após os títulos */
+     color: #333; /* Cor mais suave para os títulos */
+ }
+ 
+ p {
+     margin-bottom: 15px; /* Espaço entre os parágrafos */
+     font-size: 1.1em; /* Tamanho da fonte um pouco maior para facilitar a leitura */
+     color: #444; /* Cor mais suave para o texto */
+ }
+ 
+ a {
+     color: #1e90ff; /* Cor para o link */
+     text-decoration: none;
+ }
+ 
+ a:hover {
+     text-decoration: underline; /* Efeito ao passar o mouse */
+ }
+ 
+ img {
+     max-width: 100%; /* Para garantir que a imagem se ajuste ao tamanho da tela */
+     height: auto; /* Mantém a proporção da imagem */
+     margin-top: 20px; /* Margem acima da imagem */
+     margin-bottom: 20px; /* Margem abaixo da imagem */
+ }
