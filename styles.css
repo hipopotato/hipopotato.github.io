@@ -101,8 +101,51 @@ p {
     transition: background-color 0.3s;
 }
 
+/* Estilo para a barra de navegação fixa */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000; /* Garantir que fique acima de outros elementos */
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px; /* Limitar largura para não ocupar toda a tela */
+}
+
+/* Estilo para os links da barra de navegação como botões */
+.navbar-item {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 2px solid transparent; /* Adiciona a borda de forma invisível inicialmente */
+    border-radius: 5px; /* Arredonda os cantos */
+    transition: all 0.3s ease; /* Suaviza a transição */
+    display: inline-block; /* Garante que o link se comporte como um botão */
+}
+
+/* Estilo ao passar o mouse (hover) - efeito de borda visível */
 .navbar-item:hover {
     background-color: #ffcc00;
+    color: #333;
+    border-color: #ffcc00; /* Exibe a borda na cor de destaque */
+}
+
+/* Estilo quando o link estiver ativo ou focado */
+.navbar-item:active, .navbar-item:focus {
+    background-color: #ff9900;
+    border-color: #ff9900;
     color: #333;
 }
 
