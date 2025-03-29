@@ -242,7 +242,7 @@ p {
 
 .top-nav ul li a {
     text-decoration: none;
-    color: white; /* Texto branco */
+    color: black; /* Texto preto */
     font-weight: bold;
     font-size: 1.2em;
     padding: 10px 15px;
@@ -252,5 +252,5 @@ p {
 
 .top-nav ul li a:hover {
     background-color: #0288d1; /* Azul mais escuro no hover */
+    color: white; /* Texto branco no hover */
 }
-
