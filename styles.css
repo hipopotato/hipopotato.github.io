@@ -15,6 +15,8 @@ body {
     flex-direction: column;
     align-items: center;
     font-size: 1em; /* Diminui o tamanho da fonte principal */
+    background-color: #f4f4f4; /* Fundo mais claro para o corpo */
+    padding-top: 50px; /* Garantir que o conteúdo não fique escondido atrás da barra fixa */
 }
 
 /* Estilo para o cabeçalho */
@@ -26,8 +28,8 @@ header {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     margin-bottom: 30px;
-    font-family: Arial, sans-serif; /* Fonte igual à de section */
-    line-height: 1.6; /* Espaçamento entre linhas igual ao de section */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
 
 header h1 {
@@ -44,7 +46,7 @@ header p {
     margin-bottom: 15px;
     font-size: 1.1em;
     color: #444;
-    line-height: 1.6; /* Espaçamento entre as linhas igual ao de section */
+    line-height: 1.6;
 }
 
 /* Estilo para o conteúdo principal (section) */
@@ -55,8 +57,8 @@ section {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     margin-bottom: 30px;
-    font-family: Arial, sans-serif; /* Fonte igual à de header */
-    line-height: 1.6; /* Espaçamento entre as linhas igual ao de header */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
 
 h2, h3 {
@@ -68,8 +70,9 @@ p {
     margin-bottom: 15px;
     font-size: 1.1em;
     color: #444;
-    line-height: 1.6; /* Espaçamento entre as linhas igual ao de header */
+    line-height: 1.6;
 }
+
 /* Estilo para a barra de navegação fixa */
 .navbar {
     position: fixed;
@@ -79,7 +82,7 @@ p {
     background-color: #333;
     color: white;
     padding: 10px 0;
-    z-index: 1000; /* Garantir que fique acima de outros elementos */
+    z-index: 1000;
     display: flex;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -106,14 +109,6 @@ p {
 }
 
 /* Ajustes de conteúdo */
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    padding-top: 50px; /* Garantir que o conteúdo não fique escondido atrás da barra fixa */
-}
-
 main {
     padding: 20px;
 }
@@ -128,6 +123,7 @@ h1, h2 {
     border-radius: 5px;
 }
 
+/* Estilo do rodapé */
 footer {
     padding: 20px;
     background-color: #333;
@@ -135,6 +131,7 @@ footer {
     text-align: center;
 }
 
+/* Ajuste de topo */
 #topo {
-    padding-top: 50px; /* Garantir que o título fique abaixo da barra de navegação */
+    padding-top: 50px;
 }
