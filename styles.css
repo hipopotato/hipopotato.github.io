@@ -214,6 +214,7 @@ p {
          height: 100%; /* Mantém a altura proporcional */
      }
 /* Barra de navegação fixa no topo */
+/* Barra de navegação fixa no topo */
 .top-nav {
     position: fixed;
     top: 0;
@@ -252,3 +253,4 @@ p {
 .top-nav ul li a:hover {
     background-color: #0288d1; /* Azul mais escuro no hover */
 }
+
