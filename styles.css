@@ -47,8 +47,11 @@ header h1 {
 }
 
 header p {
-    font-size: 1em; /* Diminui o tamanho da descrição */
-    margin-bottom: 20px;
+
+    margin-bottom: 15px; /* Espaço entre os parágrafos */
+    font-size: 1.1em; /* Tamanho da fonte um pouco maior para facilitar a leitura */
+    color: #444; /* Cor mais suave para o texto */
+}
 }
 
 header img {
