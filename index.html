@@ -9,16 +9,15 @@
      <title>Hipopotato</title>
  </head>
  <body>
-  <nav class="top-nav">
-    <ul>
-        <li><a href="jogos">Jogos</a></li>
-        <li><a href="ideias">Ideias Informática</a></li>
-        <li><a href="recursos">Recursos para Professores</a></li>
-        <li><a href="profmat">Profmat</a></li>
-        <li><a href="alunos">Meus Alunos</a></li>
-        <li><a href="#">Link 6</a></li>
-    </ul>
-</nav>
+  <div id="navbar"></div> <!-- Aqui será inserida a barra de navegação -->
+
+    <script>
+        // Carregar a navegação automaticamente
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
 
  
      <!-- Cabeçalho -->
