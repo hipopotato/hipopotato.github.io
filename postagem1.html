@@ -8,12 +8,21 @@
     <title>A Importância da Notação Científica</title>
 </head>
 <body>
+      <div id="navbar"></div> <!-- Aqui será inserida a barra de navegação -->
+
+    <script>
+        // Carregar a navegação automaticamente
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
 
 <header>
     <h1>A Importância da Notação Científica</h1>
 </header>
 
-<main>
+<section>
     <p>Estudar notação científica é importante porque ela nos ajuda a entender melhor o tamanho das coisas no mundo — desde a imensidão do universo até as menores partículas. Com a notação científica, conseguimos trabalhar com números muito grandes ou muito pequenos de forma mais prática e segura, sem precisar lidar com filas intermináveis de algarismos, que podem confundir e levar a erros. Ela facilita a compreensão e comparação de quantidades, tornando tudo mais acessível!</p>
 
     <p>Agora, vamos assistir ao vídeo "A imensidão do micro e do macrocosmo". Ele mostra como existem dimensões no universo — tanto gigantescas quanto minúsculas — que muitas vezes nem imaginamos. Prepare-se para expandir sua visão sobre o mundo!</p>
@@ -59,7 +68,11 @@
     <div class="video-link">
         <a href="https://www.khanacademy.org/math/notacao-cientifica" target="_blank">Acesse aqui: Khan Academy - Notação Científica</a>
     </div>
-</main>
+</section>
 
+        <footer>
+        <button onclick="window.location.href='index.html'">⬅️ Voltar para o Início</button>
+    </footer>
 </body>
+</html>
 </html>
