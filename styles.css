@@ -254,3 +254,15 @@ p {
     background-color: #0288d1; /* Azul mais escuro no hover */
     color: white; /* Texto branco no hover */
 }
+.code-box {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  max-height: 300px;  /* altura máxima */
+  overflow-y: auto;   /* cria a barra de rolagem */
+  font-family: monospace;
+  font-size: 14px;
+  white-space: pre;   /* mantém formatação */
+}
+
