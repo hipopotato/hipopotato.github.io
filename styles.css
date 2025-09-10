@@ -255,14 +255,31 @@ p {
     color: white; /* Texto branco no hover */
 }
 .code-box {
-  background-color: #f4f4f4;
-  border: 1px solid #ccc;
+  background-color: #1e1e1e;   /* fundo VS Code */
+  color: #d4d4d4;              /* texto padrão */
+  border: 1px solid #3c3c3c;
   border-radius: 8px;
-  padding: 10px;
-  max-height: 300px;  /* altura máxima */
-  overflow-y: auto;   /* cria a barra de rolagem */
-  font-family: monospace;
+  padding: 12px;
+  max-height: 400px;           /* altura máxima */
+  overflow-y: auto;            /* barra de rolagem */
+  font-family: "Fira Code", Consolas, monospace;
   font-size: 14px;
-  white-space: pre;   /* mantém formatação */
+  white-space: pre;            /* mantém formatação */
+  line-height: 1.4;
+}
+
+/* Barra de rolagem estilo VS Code */
+.code-box::-webkit-scrollbar {
+  width: 10px;
+}
+.code-box::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+.code-box::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 5px;
+}
+.code-box::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
 }
 
