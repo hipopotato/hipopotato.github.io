@@ -523,7 +523,107 @@ class Tiling4_8_8(Scene):
   <!-- Caixa para o código -->
   <div class="code-box" id="codigo4">
     <pre><code>
-    ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+from manim import *
+import numpy as np
+
+class Tiling3464_Corrected(Scene):
+    def construct(self):
+        # --- Configurações ---
+        self.camera.background_color = "#333333"
+        L = 1.5  # Comprimento do lado dos polígonos
+
+        # --- Cores ---
+        COLOR_HEX = GREEN
+        COLOR_SQUARE = RED
+        COLOR_TRI = ORANGE
+
+        # --- Etapa 1: Criar o Hexágono Central ---
+        center_hex = RegularPolygon(n=6, radius=L)
+        center_hex.set_fill(COLOR_HEX, opacity=1).set_stroke(BLACK, 2)
+
+        self.play(Create(center_hex))
+        self.wait(0.5)
+
+        # --- Etapa 2: Construir a primeira camada de quadrados e triângulos ---
+        layer1_squares = VGroup()
+        layer1_triangles = VGroup()
+
+        square_verts_list = []
+        for i in range(6):
+            p1 = center_hex.get_vertices()[i]
+            p2 = center_hex.get_vertices()[(i + 1) % 6]
+
+            edge_vector = p2 - p1
+            perp_vector = rotate_vector(edge_vector, -PI / 2)
+
+            p3 = p2 + perp_vector
+            p4 = p1 + perp_vector
+            square_verts_list.append([p1, p2, p3, p4])
+
+        for i in range(6):
+            verts_sq = square_verts_list[i]
+            square = Polygon(*verts_sq, color=COLOR_SQUARE, fill_opacity=1).set_stroke(BLACK, 2)
+            layer1_squares.add(square)
+
+            verts_tri_prev_sq = square_verts_list[i-1]
+
+            v1 = center_hex.get_vertices()[i]
+            v2 = verts_tri_prev_sq[2]
+            v3 = verts_sq[3]
+
+            triangle = Polygon(v1, v2, v3, color=COLOR_TRI, fill_opacity=1).set_stroke(BLACK, 2)
+            layer1_triangles.add(triangle)
+
+        run_time_per_piece = 0.25
+        for sq in layer1_squares:
+            self.play(Create(sq), run_time=run_time_per_piece)
+        for tri in layer1_triangles:
+            self.play(Create(tri), run_time=run_time_per_piece)
+        self.wait(0.5)
+
+        # --- Etapa 3: Construir a segunda camada externa ---
+        layer2_hexagons = VGroup()
+        layer2_squares = VGroup()
+
+        for i in range(6):
+            verts_sq = square_verts_list[i]
+            p1_hex = verts_sq[3] 
+            p2_hex = verts_sq[2] 
+
+            side_vector = p2_hex - p1_hex
+            hex_points = [p1_hex, p2_hex]
+            current_point = p2_hex
+            angle = -PI / 3 
+            for _ in range(4):
+                side_vector = rotate_vector(side_vector, angle)
+                current_point = current_point + side_vector
+                hex_points.append(current_point)
+
+            new_hex = Polygon(*hex_points, color=COLOR_HEX, fill_opacity=1).set_stroke(BLACK, 2)
+            layer2_hexagons.add(new_hex)
+
+        for tri in layer1_triangles:
+            verts_tri = tri.get_vertices()
+            distances = [np.linalg.norm(v) for v in verts_tri]
+            inner_vertex_index = np.argmin(distances)
+
+            p1_sq = verts_tri[(inner_vertex_index + 1) % 3]
+            p2_sq = verts_tri[(inner_vertex_index + 2) % 3]
+
+            edge_vector = p2_sq - p1_sq
+            perp_vector = rotate_vector(edge_vector, -PI / 2) 
+            p3_sq = p2_sq + perp_vector
+            p4_sq = p1_sq + perp_vector
+
+            new_square = Polygon(p1_sq, p2_sq, p3_sq, p4_sq, color=COLOR_SQUARE, fill_opacity=1).set_stroke(BLACK, 2)
+            layer2_squares.add(new_square)
+
+        for hx in layer2_hexagons:
+            self.play(Create(hx), run_time=run_time_per_piece)
+        for sq in layer2_squares:
+            self.play(Create(sq), run_time=run_time_per_piece)
+
+        self.wait(3)
     </code></pre>
   </div>
   <button onclick="copiarCodigo('codigo4')">Copiar Código</button>
@@ -538,7 +638,38 @@ class Tiling4_8_8(Scene):
   <!-- Link do vídeo -->
   <p>Vídeo relacionado:<br>  
           <iframe width="600" height="340"
-      src="https://www.youtube.com/embed/76kPLzGiE5Q"
+      src="https://www.youtube.com/embed/tIZmGaYscbw"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="border-radius:8px;">
+    </iframe>
+  </p>
+</section>
+</div>
+
+<section class="section6">
+  <h2>Ladrilhamento (3,4,6,4)</h2>
+  <!-- Caixa para o código -->
+  <div class="code-box" id="codigo5">
+    <pre><code>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+    </code></pre>
+  </div>
+  <button onclick="copiarCodigo('codigo5')">Copiar Código</button>
+    <script>
+    function copiarCodigo(id) {
+        const codigo = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(codigo).then(() => {
+            alert("Código copiado!");
+        });
+    }
+    </script>                      
+  <!-- Link do vídeo -->
+  <p>Vídeo relacionado:<br>  
+          <iframe width="600" height="340"
+      src="https://www.youtube.com/embed/tIZmGaYscbw"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
