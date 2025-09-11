@@ -650,14 +650,176 @@ class Tiling3464_Corrected(Scene):
 </div>
 
 <section class="section6">
-  <h2>Ladrilhamento (3,4,6,4)</h2>
+  <h2>Ladrilhamento (3,6,3,6)</h2>
   <!-- Caixa para o código -->
   <div class="code-box" id="codigo5">
+    <pre><code>
+from manim import *
+import numpy as np
+
+class Tiling3636(Scene):
+    def construct(self):
+        # --- Configurações ---
+        self.camera.background_color = "#333333"
+        L = 1.5  # Comprimento do lado dos polígonos
+
+        # --- Cores ---
+        COLOR_HEX = GREEN
+        COLOR_TRI = ORANGE
+        
+        # --- Sistema para evitar duplicatas ---
+        existing_centers = set()
+        def add_polygon_if_unique(poly, group_to_add):
+            center = poly.get_center()
+            rounded_center = (round(center[0], 2), round(center[1], 2))
+            if rounded_center not in existing_centers:
+                existing_centers.add(rounded_center)
+                group_to_add.add(poly)
+                return True
+            return False
+
+        # --- Etapa 1: Hexágono Central ---
+        center_hex = RegularPolygon(n=6, radius=L)
+        center_hex.set_fill(COLOR_HEX, opacity=1).set_stroke(BLACK, 2)
+        add_polygon_if_unique(center_hex, VGroup())
+        
+        self.play(Create(center_hex))
+        self.wait(0.5)
+
+        # --- Etapa 2: Construir a primeira camada de triângulos ---
+        layer1_triangles = VGroup()
+        
+        for i in range(6):
+            p1 = center_hex.get_vertices()[i]
+            p2 = center_hex.get_vertices()[(i + 1) % 6]
+            
+            edge_vector = p2 - p1
+            side_length = np.linalg.norm(edge_vector)
+            height = side_length * np.sqrt(3) / 2
+            mid_point = (p1 + p2) / 2
+            perp_vector = rotate_vector(edge_vector, -PI / 2)
+            unit_perp_vector = perp_vector / side_length
+            p3 = mid_point + unit_perp_vector * height
+            
+            triangle = Polygon(p1, p2, p3, color=COLOR_TRI, fill_opacity=1).set_stroke(BLACK, 2)
+            add_polygon_if_unique(triangle, layer1_triangles)
+
+        run_time_per_piece = 0.2
+        for tri in layer1_triangles:
+            self.play(Create(tri), run_time=run_time_per_piece)
+        self.wait(0.5)
+
+        # --- Etapa 3: Construir a segunda camada de hexágonos ---
+        layer2_hexagons = VGroup()
+        layer2_hexagons_list = []
+
+        for tri in layer1_triangles:
+            verts_tri = tri.get_vertices()
+            
+            midpoints = [np.linalg.norm((verts_tri[j] + verts_tri[(j + 1) % 3]) / 2) for j in range(3)]
+            inner_edge_idx = np.argmin(midpoints)
+            
+            for offset in [1, 2]:
+                edge_idx = (inner_edge_idx + offset) % 3
+                p1 = verts_tri[(edge_idx + 1) % 3] 
+                p2 = verts_tri[edge_idx]
+                
+                side_vector = p2 - p1
+                hex_points = [p1, p2]
+                current_point = p2
+                angle = -PI / 3
+                for _ in range(4):
+                    side_vector = rotate_vector(side_vector, angle)
+                    current_point = current_point + side_vector
+                    hex_points.append(current_point)
+                
+                new_hex = Polygon(*hex_points, color=COLOR_HEX, fill_opacity=1).set_stroke(BLACK, 2)
+                if add_polygon_if_unique(new_hex, layer2_hexagons):
+                    layer2_hexagons_list.append(new_hex)
+
+        for hx in layer2_hexagons:
+            self.play(Create(hx), run_time=run_time_per_piece)
+        self.wait(0.5)
+
+        # --- Etapa 4: Preenchimento dos vãos com triângulos (MÉTODO À PROVA DE FALHAS) ---
+        layer3_triangles = VGroup()
+        
+        # Itera sobre os triângulos da primeira camada, que servem de "âncora" para os vãos
+        for tri_anchor in layer1_triangles:
+            verts_anchor = tri_anchor.get_vertices()
+            
+            # 1. Encontra o vértice externo do triângulo-âncora. Este é o fundo do "V".
+            outer_v_anchor = verts_anchor[np.argmax([np.linalg.norm(v) for v in verts_anchor])]
+
+            # 2. Procura na lista de hexágonos quais os 2 que tocam neste vértice
+            adjacent_hexagons = []
+            for hex_l2 in layer2_hexagons_list:
+                for v_hex in hex_l2.get_vertices():
+                    if np.linalg.norm(v_hex - outer_v_anchor) < 0.01:
+                        adjacent_hexagons.append(hex_l2)
+                        break
+            
+            # Garante que encontramos exatamente 2 hexágonos
+            if len(adjacent_hexagons) == 2:
+                hex1, hex2 = adjacent_hexagons[0], adjacent_hexagons[1]
+                
+                # 3. Encontra os outros 2 vértices do triângulo
+                
+                # Para o hex1, encontra o vértice adjacente ao ponto de encontro que é mais externo
+                verts1 = hex1.get_vertices()
+                idx1 = np.where([np.allclose(v, outer_v_anchor) for v in verts1])[0][0]
+                adj1_a, adj1_b = verts1[(idx1 - 1 + 6) % 6], verts1[(idx1 + 1) % 6]
+                outer_v1 = adj1_a if np.linalg.norm(adj1_a) > np.linalg.norm(adj1_b) else adj1_b
+
+                # Para o hex2, faz o mesmo
+                verts2 = hex2.get_vertices()
+                idx2 = np.where([np.allclose(v, outer_v_anchor) for v in verts2])[0][0]
+                adj2_a, adj2_b = verts2[(idx2 - 1 + 6) % 6], verts2[(idx2 + 1) % 6]
+                outer_v2 = adj2_a if np.linalg.norm(adj2_a) > np.linalg.norm(adj2_b) else adj2_b
+
+                # 4. Cria o triângulo que preenche o vão
+                new_triangle = Polygon(outer_v_anchor, outer_v1, outer_v2, color=COLOR_TRI, fill_opacity=1).set_stroke(BLACK, 2)
+                add_polygon_if_unique(new_triangle, layer3_triangles)
+
+        for tri in layer3_triangles:
+            self.play(Create(tri), run_time=run_time_per_piece)
+        
+        self.wait(3)
+    </code></pre>
+  </div>
+  <button onclick="copiarCodigo('codigo5')">Copiar Código</button>
+    <script>
+    function copiarCodigo(id) {
+        const codigo = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(codigo).then(() => {
+            alert("Código copiado!");
+        });
+    }
+    </script>                      
+  <!-- Link do vídeo -->
+  <p>Vídeo relacionado:<br>  
+          <iframe width="600" height="340"
+      src="https://www.youtube.com/embed/zds6ki2IUEc"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="border-radius:8px;">
+    </iframe>
+  </p>
+</section>
+</div>
+
+
+<section class="section7">
+  <h2>Ladrilhamento (3,6,3,6)</h2>
+  <!-- Caixa para o código -->
+  <div class="code-box" id="codigo6">
     <pre><code>
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
     </code></pre>
   </div>
-  <button onclick="copiarCodigo('codigo5')">Copiar Código</button>
+  <button onclick="copiarCodigo('codigo6')">Copiar Código</button>
     <script>
     function copiarCodigo(id) {
         const codigo = document.getElementById(id).innerText;
