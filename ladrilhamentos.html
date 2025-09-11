@@ -33,10 +33,158 @@ O tema explorado são os ladrilhamentos bem-comportados. De forma rápida, um la
       Existem 11 tipos de ladrilhamentos bem comportados. Dentre eles, três são formados por polígonos regulares de um único tipo: o triangular, com padrão (3,3,3,3,3,3); o quadrado, com padrão (4,4,4,4); e o hexagonal, com padrão (6,6,6). Os oito restantes são formados por dois ou mais tipos de polígonos regulares, sendo eles: (3,12,12), (4,6,12), (4,8,8), (3,4,6,4), (3,6,3,6), (3,3,3,4,4), (3,3,3,3,6) e (3,4,3,3,4). A seguir, apresentam-se os códigos utilizados e os vídeos renderizados correspondentes a cada construção.</p>
 
     </section>
-    <section class="section0">
+    
+
+<section class="section2">
+  <h2>Ladrilhamento (3,12,12)</h2>
+  <!-- Caixa para o código -->
+  <div class="code-box" id="codigo1">
+    <pre><code>
+from manim import *
+import numpy as np
+
+class Tiling3_12_12(Scene):
+    def construct(self):
+        # --- Configurações ---
+        self.camera.background_color = "#333333" # Fundo escuro para contraste
+        L = 1.0  # Comprimento do lado dos polígonos
+
+        # --- Cores ---
+        COLOR_DODEC = BLUE
+        COLOR_TRI = ORANGE
+
+        # Conjunto para armazenar coordenadas de centros e evitar duplicatas
+        existing_centers = set()
+
+        # --- Funções Auxiliares ---
+        def add_polygon_if_unique(poly, group_to_add):
+            """Adiciona um polígono a um grupo se ele não for um duplicado."""
+            center = poly.get_center()
+            rounded_center = (round(center[0], 2), round(center[1], 2))
+            
+            if rounded_center not in existing_centers:
+                existing_centers.add(rounded_center)
+                group_to_add.add(poly)
+                return True
+            return False
+
+        def attach_polygon(n_sides, color, target_side):
+            """Cria e anexa um polígono a uma aresta específica."""
+            radius = L / (2 * np.sin(PI / n_sides))
+            poly = RegularPolygon(n=n_sides, radius=radius)
+            poly.set_fill(color, opacity=1).set_stroke(BLACK, width=2)
+
+            v = poly.get_vertices()
+            p1, p2 = v[0], v[1]
+            
+            poly.shift(target_side[0] - p1)
+            
+            p2_new = p2 + (target_side[0] - p1)
+            angle_target = angle_of_vector(target_side[1] - target_side[0])
+            angle_current = angle_of_vector(p2_new - target_side[0])
+            poly.rotate(angle_target - angle_current, about_point=target_side[0])
+            
+            return poly
+
+        # --- Camada 0: Dodecágono Central ---
+        dodecagon = RegularPolygon(n=12, radius=L / (2*np.sin(PI/12)))
+        dodecagon.set_fill(COLOR_DODEC, opacity=1).set_stroke(BLACK, width=2)
+        
+        layer0_group = VGroup()
+        add_polygon_if_unique(dodecagon, layer0_group)
+        self.play(Create(layer0_group))
+        self.wait(0.5)
+
+        # --- Camada 1: Primeira Expansão (Dodecágonos e Triângulos) ---
+        layer1_group = VGroup()
+        layer1_polys_list = [] # Lista para iterar na próxima camada
+        dodec_vertices = dodecagon.get_vertices()
+
+        for i in range(12):
+            # Inverte a aresta para construir para fora
+            side = (dodec_vertices[(i + 1) % 12], dodec_vertices[i])
+            
+            if i % 2 == 0: # Arestas pares recebem dodecágonos
+                new_poly = attach_polygon(12, COLOR_DODEC, side)
+            else: # Arestas ímpares recebem triângulos
+                new_poly = attach_polygon(3, COLOR_TRI, side)
+            
+            if add_polygon_if_unique(new_poly, layer1_group):
+                layer1_polys_list.append(new_poly)
+
+        self.play(Create(layer1_group), run_time=3)
+        self.wait(0.5)
+        
+        # --- Camada 2: Segunda Expansão ---
+        layer2_group = VGroup()
+        for base_poly in layer1_polys_list:
+            vertices = base_poly.get_vertices()
+            num_sides = len(vertices)
+
+            # Encontra a aresta "interna" (mais próxima do centro da cena)
+            min_dist = float('inf')
+            attached_edge_index = 0
+            for i in range(num_sides):
+                mid = (vertices[i] + vertices[(i + 1) % num_sides]) / 2
+                dist = np.linalg.norm(mid)
+                if dist < min_dist:
+                    min_dist = dist
+                    attached_edge_index = i
+            
+            # Expansão a partir de um TRIÂNGULO
+            if num_sides == 3:
+                # As 2 arestas livres recebem dodecágonos
+                for offset in [1, 2]:
+                    edge_index = (attached_edge_index + offset) % num_sides
+                    side = (vertices[(edge_index + 1) % num_sides], vertices[edge_index])
+                    new_dodec = attach_polygon(12, COLOR_DODEC, side)
+                    add_polygon_if_unique(new_dodec, layer2_group)
+            
+            # Expansão a partir de um DODECÁGONO
+            elif num_sides == 12:
+                # As 9 arestas livres recebem um padrão alternado de D-T-D-T...
+                for offset in range(2, 11): # As arestas com offset 0, 1 e 11 estão ocupadas
+                    edge_index = (attached_edge_index + offset) % num_sides
+                    side = (vertices[(edge_index + 1) % num_sides], vertices[edge_index])
+                    
+                    if offset % 2 == 0: # Posição par no padrão livre: Dodecágono
+                         new_poly = attach_polygon(12, COLOR_DODEC, side)
+                    else: # Posição ímpar no padrão livre: Triângulo
+                         new_poly = attach_polygon(3, COLOR_TRI, side)
+                    
+                    add_polygon_if_unique(new_poly, layer2_group)
+
+        self.play(Create(layer2_group), run_time=4)
+        self.wait(3)
+    </code></pre>
+  </div>
+  <button onclick="copiarCodigo('codigo1')">Copiar Código</button>
+    <script>
+    function copiarCodigo(id) {
+        const codigo = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(codigo).then(() => {
+            alert("Código copiado!");
+        });
+    }
+    </script>                      
+  <!-- Link do vídeo -->
+  <p>Vídeo relacionado:<br>  
+          <iframe width="600" height="340"
+      src="https://www.youtube.com/watch?v=hGGUnIBu5Xc"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="border-radius:8px;">
+    </iframe>
+  </p>
+</section>
+</div>
+
+<section class="section3">
   <h2>Ladrilhamento (4,6,12)</h2>
   <!-- Caixa para o código -->
-  <div class="code-box" id="codigo0">
+  <div class="code-box" id="codigo2">
     <pre><code>
 from manim import *
 import numpy as np
@@ -201,7 +349,7 @@ class Tiling124(Scene):
         self.wait(3)
     </code></pre>
   </div>
-  <button onclick="copiarCodigo('codigo0')">Copiar Código</button>
+  <button onclick="copiarCodigo('codigo2')">Copiar Código</button>
     <script>
     function copiarCodigo(id) {
         const codigo = document.getElementById(id).innerText;
@@ -224,131 +372,15 @@ class Tiling124(Scene):
 </section>
 </div>
 
-
-<section class="section2">
-  <h2>Ladrilhamento (3,12,12)</h2>
+<section class="section4">
+  <h2>Ladrilhamento (4,6,12)</h2>
   <!-- Caixa para o código -->
-  <div class="code-box" id="codigo1">
+  <div class="code-box" id="codigo3">
     <pre><code>
-from manim import *
-import numpy as np
-
-class Tiling3_12_12(Scene):
-    def construct(self):
-        # --- Configurações ---
-        self.camera.background_color = "#333333" # Fundo escuro para contraste
-        L = 1.0  # Comprimento do lado dos polígonos
-
-        # --- Cores ---
-        COLOR_DODEC = BLUE
-        COLOR_TRI = ORANGE
-
-        # Conjunto para armazenar coordenadas de centros e evitar duplicatas
-        existing_centers = set()
-
-        # --- Funções Auxiliares ---
-        def add_polygon_if_unique(poly, group_to_add):
-            """Adiciona um polígono a um grupo se ele não for um duplicado."""
-            center = poly.get_center()
-            rounded_center = (round(center[0], 2), round(center[1], 2))
-            
-            if rounded_center not in existing_centers:
-                existing_centers.add(rounded_center)
-                group_to_add.add(poly)
-                return True
-            return False
-
-        def attach_polygon(n_sides, color, target_side):
-            """Cria e anexa um polígono a uma aresta específica."""
-            radius = L / (2 * np.sin(PI / n_sides))
-            poly = RegularPolygon(n=n_sides, radius=radius)
-            poly.set_fill(color, opacity=1).set_stroke(BLACK, width=2)
-
-            v = poly.get_vertices()
-            p1, p2 = v[0], v[1]
-            
-            poly.shift(target_side[0] - p1)
-            
-            p2_new = p2 + (target_side[0] - p1)
-            angle_target = angle_of_vector(target_side[1] - target_side[0])
-            angle_current = angle_of_vector(p2_new - target_side[0])
-            poly.rotate(angle_target - angle_current, about_point=target_side[0])
-            
-            return poly
-
-        # --- Camada 0: Dodecágono Central ---
-        dodecagon = RegularPolygon(n=12, radius=L / (2*np.sin(PI/12)))
-        dodecagon.set_fill(COLOR_DODEC, opacity=1).set_stroke(BLACK, width=2)
-        
-        layer0_group = VGroup()
-        add_polygon_if_unique(dodecagon, layer0_group)
-        self.play(Create(layer0_group))
-        self.wait(0.5)
-
-        # --- Camada 1: Primeira Expansão (Dodecágonos e Triângulos) ---
-        layer1_group = VGroup()
-        layer1_polys_list = [] # Lista para iterar na próxima camada
-        dodec_vertices = dodecagon.get_vertices()
-
-        for i in range(12):
-            # Inverte a aresta para construir para fora
-            side = (dodec_vertices[(i + 1) % 12], dodec_vertices[i])
-            
-            if i % 2 == 0: # Arestas pares recebem dodecágonos
-                new_poly = attach_polygon(12, COLOR_DODEC, side)
-            else: # Arestas ímpares recebem triângulos
-                new_poly = attach_polygon(3, COLOR_TRI, side)
-            
-            if add_polygon_if_unique(new_poly, layer1_group):
-                layer1_polys_list.append(new_poly)
-
-        self.play(Create(layer1_group), run_time=3)
-        self.wait(0.5)
-        
-        # --- Camada 2: Segunda Expansão ---
-        layer2_group = VGroup()
-        for base_poly in layer1_polys_list:
-            vertices = base_poly.get_vertices()
-            num_sides = len(vertices)
-
-            # Encontra a aresta "interna" (mais próxima do centro da cena)
-            min_dist = float('inf')
-            attached_edge_index = 0
-            for i in range(num_sides):
-                mid = (vertices[i] + vertices[(i + 1) % num_sides]) / 2
-                dist = np.linalg.norm(mid)
-                if dist < min_dist:
-                    min_dist = dist
-                    attached_edge_index = i
-            
-            # Expansão a partir de um TRIÂNGULO
-            if num_sides == 3:
-                # As 2 arestas livres recebem dodecágonos
-                for offset in [1, 2]:
-                    edge_index = (attached_edge_index + offset) % num_sides
-                    side = (vertices[(edge_index + 1) % num_sides], vertices[edge_index])
-                    new_dodec = attach_polygon(12, COLOR_DODEC, side)
-                    add_polygon_if_unique(new_dodec, layer2_group)
-            
-            # Expansão a partir de um DODECÁGONO
-            elif num_sides == 12:
-                # As 9 arestas livres recebem um padrão alternado de D-T-D-T...
-                for offset in range(2, 11): # As arestas com offset 0, 1 e 11 estão ocupadas
-                    edge_index = (attached_edge_index + offset) % num_sides
-                    side = (vertices[(edge_index + 1) % num_sides], vertices[edge_index])
-                    
-                    if offset % 2 == 0: # Posição par no padrão livre: Dodecágono
-                         new_poly = attach_polygon(12, COLOR_DODEC, side)
-                    else: # Posição ímpar no padrão livre: Triângulo
-                         new_poly = attach_polygon(3, COLOR_TRI, side)
-                    
-                    add_polygon_if_unique(new_poly, layer2_group)
-
-        self.play(Create(layer2_group), run_time=4)
-        self.wait(3)
+manimmmmmmmmmmmmmmmmmmmmmmmmmm
     </code></pre>
   </div>
-  <button onclick="copiarCodigo('codigo1')">Copiar Código</button>
+  <button onclick="copiarCodigo('codigo3')">Copiar Código</button>
     <script>
     function copiarCodigo(id) {
         const codigo = document.getElementById(id).innerText;
@@ -360,7 +392,7 @@ class Tiling3_12_12(Scene):
   <!-- Link do vídeo -->
   <p>Vídeo relacionado:<br>  
           <iframe width="600" height="340"
-      src="https://www.youtube.com/watch?v=hGGUnIBu5Xc"
+      src="https://www.youtube.com/embed/zSOAJamGVpg"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -370,15 +402,6 @@ class Tiling3_12_12(Scene):
   </p>
 </section>
 </div>
-                        
-<section class="section3"> 
-</div>
-
-
-
-  
-    <div class="section4">
-    </div>
 
 
     <div class="section3">
