@@ -812,14 +812,125 @@ class Tiling3636(Scene):
 
 
 <section class="section7">
-  <h2>Ladrilhamento (3,6,3,6)</h2>
+  <h2>Ladrilhamento (4,3,3,4)</h2>
   <!-- Caixa para o código -->
   <div class="code-box" id="codigo6">
+    <pre><code>
+from manim import *
+import numpy as np
+
+class Tiling33344_GridExpand(Scene):
+    def construct(self):
+        # --- Configurações ---
+        self.camera.background_color = "#333333"
+        L = 1.0  # Comprimento do lado dos polígonos
+
+        # --- Cores ---
+        COLOR_SQUARE = ORANGE
+        COLOR_TRI = PINK
+        
+        # --- Função Auxiliar ---
+        def build_triangle_on_edge(p_start, p_end, color, direction='ccw'):
+            side_length = np.linalg.norm(p_end - p_start)
+            mid = (p_start + p_end) / 2
+            edge = p_end - p_start
+            rotation = PI/2 if direction == 'ccw' else -PI/2
+            height_vec = rotate_vector(edge, rotation) * np.sqrt(3)/2
+            p_new = mid + height_vec
+            return Polygon(p_start, p_end, p_new, color=color, fill_opacity=1).set_stroke(BLACK, 2)
+        
+        all_polys = VGroup()
+        
+        # --- Parâmetros da Grade (VALORES AUMENTADOS) ---
+        num_cols = 21 # Antes era 11
+        num_rows = 11 # Antes era 7
+
+        h_tri = L * np.sqrt(3) / 2
+        
+        # Iterar para construir as linhas de formas
+        for j in range(-num_rows // 2, num_rows // 2 + 1):
+            y_offset = j * (L + h_tri)
+            
+            if j % 2 == 0: 
+                x_start = -(num_cols * L) / 2 
+            else: 
+                x_start = -(num_cols * L) / 2 + L/2 
+
+            for i in range(num_cols):
+                sq = Square(side_length=L, color=COLOR_SQUARE, fill_opacity=1).set_stroke(BLACK, 2)
+                sq.move_to(np.array([x_start + i * L, y_offset, 0]))
+                all_polys.add(sq)
+
+            if j < (num_rows // 2):
+                for i in range(num_cols - 1):
+                    p1_up = np.array([x_start + i * L + L/2, y_offset + L/2, 0])
+                    p2_up = np.array([x_start + (i+1) * L + L/2, y_offset + L/2, 0])
+                    tri_up = build_triangle_on_edge(p1_up, p2_up, COLOR_TRI, direction='ccw')
+                    all_polys.add(tri_up)
+                
+                for i in range(num_cols - 1):
+                    p1_down = np.array([x_start + i * L + L/2, y_offset - L/2, 0])
+                    p2_down = np.array([x_start + (i+1) * L + L/2, y_offset - L/2, 0])
+                    tri_down = build_triangle_on_edge(p1_down, p2_down, COLOR_TRI, direction='cw')
+                    all_polys.add(tri_down)
+
+        # Remove duplicatas
+        unique_polys = VGroup()
+        centers_added = set()
+        for poly in all_polys:
+            c = tuple(np.round(poly.get_center(), 3))
+            if c not in centers_added:
+                unique_polys.add(poly)
+                centers_added.add(c)
+        all_polys = unique_polys
+
+        # Centraliza e ajusta a escala AUTOMATICAMENTE para caber na tela
+        all_polys.center()
+        # Define a largura desejada (um pouco menor que a tela para ter margem)
+        desired_width = 13 
+        current_width = all_polys.get_width()
+        if current_width > 0:
+            all_polys.scale(desired_width / current_width)
+
+        # --- Animação: Crescer do Centro para Fora ---
+        sorted_polys = sorted(all_polys, key=lambda p: np.linalg.norm(p.get_center()))
+
+        self.play(LaggedStart(*[Create(p) for p in sorted_polys], lag_ratio=0.005, run_time=12))
+        self.wait(3)
+    </code></pre>
+  </div>
+  <button onclick="copiarCodigo('codigo6')">Copiar Código</button>
+    <script>
+    function copiarCodigo(id) {
+        const codigo = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(codigo).then(() => {
+            alert("Código copiado!");
+        });
+    }
+    </script>                      
+  <!-- Link do vídeo -->
+  <p>Vídeo relacionado:<br>  
+          <iframe width="600" height="340"
+      src="https://www.youtube.com/embed/OW27Jt4eR10"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="border-radius:8px;">
+    </iframe>
+  </p>
+</section>
+</div>
+
+    <section class="section8">
+  <h2>Ladrilhamento (3,6,3,6)</h2>
+  <!-- Caixa para o código -->
+  <div class="code-box" id="codigo7">
     <pre><code>
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
     </code></pre>
   </div>
-  <button onclick="copiarCodigo('codigo6')">Copiar Código</button>
+  <button onclick="copiarCodigo('codigo7')">Copiar Código</button>
     <script>
     function copiarCodigo(id) {
         const codigo = document.getElementById(id).innerText;
@@ -841,6 +952,6 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
   </p>
 </section>
 </div>
-
+                    
 </body>
 </html>
