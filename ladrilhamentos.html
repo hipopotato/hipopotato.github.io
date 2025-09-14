@@ -927,10 +927,283 @@ class Tiling33344_GridExpand(Scene):
   <!-- Caixa para o código -->
   <div class="code-box" id="codigo7">
     <pre><code>
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+from manim import *
+import numpy as np
+
+class EstrelaBase(Scene):
+    def construct(self):
+        # --- Configurações ---
+        self.camera.background_color = "#000000"
+        LADO = 2.0
+        
+        # Cores
+        COR_HEXAGONO = BLUE_E
+        COR_TRIANGULOS = PINK 
+
+        # --- PARTE 1: DESENHAR O HEXÁGONO CENTRAL ---
+        hexagono = RegularPolygon(n=6, radius=LADO) 
+        hexagono.set_fill(COR_HEXAGONO, opacity=1.0)
+        hexagono.set_stroke(WHITE, width=3)
+
+        self.play(Create(hexagono))
+        self.wait(0.25)
+
+        # --- PARTE 2: DESENHAR OS TRIÂNGULOS DA CAMADA 1 ---
+        grupo_triangulos_camada1 = VGroup()
+        pontos_externos_recuados = []
+
+        for i in range(6):
+            ponto1 = hexagono.get_vertices()[i]
+            ponto2 = hexagono.get_vertices()[(i + 1) % 6]
+
+            vetor_do_lado = ponto2 - ponto1
+            ponto_medio = (ponto1 + ponto2) / 2
+            vetor_normal = rotate_vector(vetor_do_lado, -PI / 2)
+            altura = LADO * np.sqrt(3) / 2
+            ponto3 = ponto_medio + normalize(vetor_normal) * altura
+            
+            pontos_externos_recuados.append(ponto3)
+
+            triangulo = Polygon(ponto1, ponto2, ponto3)
+            grupo_triangulos_camada1.add(triangulo)
+
+        grupo_triangulos_camada1.set_fill(COR_TRIANGULOS, opacity=1.0).set_stroke(WHITE, width=3)
+        self.play(Create(grupo_triangulos_camada1))
+        self.wait(0.25)
+
+        # --- PARTE 3: PREENCHER OS VÃOS (CAMADA 2) ---
+        grupo_triangulos_camada2 = VGroup()
+        pontos_externos_pontudos = []
+
+        for i in range(6):
+            vertice_do_hexagono = hexagono.get_vertices()[i]
+            ponta_externa_anterior = pontos_externos_recuados[i - 1]
+            ponta_externa_atual = pontos_externos_recuados[i]
+
+            vetor_do_centro_ao_vertice = vertice_do_hexagono - hexagono.get_center()
+            novo_ponto_externo = vertice_do_hexagono + vetor_do_centro_ao_vertice
+            
+            pontos_externos_pontudos.append(novo_ponto_externo)
+
+            triangulo1 = Polygon(vertice_do_hexagono, ponta_externa_anterior, novo_ponto_externo)
+            triangulo2 = Polygon(vertice_do_hexagono, novo_ponto_externo, ponta_externa_atual)
+            grupo_triangulos_camada2.add(triangulo1, triangulo2)
+
+        grupo_triangulos_camada2.set_fill(COR_TRIANGULOS, opacity=1.0).set_stroke(WHITE, width=3)
+        self.play(Create(grupo_triangulos_camada2))
+        self.wait(0.25)
+
+        # --- PARTE 4: ADICIONAR TRIÂNGULOS (CAMADA 3) ---
+        grupo_triangulos_camada3 = VGroup()
+
+        for i in range(6):
+            p1 = pontos_externos_recuados[i]
+            p2 = pontos_externos_pontudos[i]
+
+            vetor_do_lado = p2 - p1
+            ponto_medio = (p1 + p2) / 2
+            vetor_normal = rotate_vector(vetor_do_lado, PI / 2)
+            altura = LADO * np.sqrt(3) / 2
+            p3 = ponto_medio + normalize(vetor_normal) * altura
+
+            novo_triangulo = Polygon(p1, p2, p3)
+            novo_triangulo.set_fill(COR_TRIANGULOS, opacity=1.0).set_stroke(WHITE, width=3)
+            grupo_triangulos_camada3.add(novo_triangulo)
+            
+        self.play(DrawBorderThenFill(grupo_triangulos_camada3))
+        self.wait(0.25)
+        # --- PARTE 5: ADICIONAR HEXÁGONOS ALINHADOS AOS TRIÂNGULOS ---
+        grupo_hexagonos_camada4 = VGroup()
+        centro_principal = hexagono.get_center()
+
+        # função auxiliar: ângulo assinado entre vetores 2D (u -> v)
+        def signed_angle(u, v):
+            cross = u[0]*v[1] - u[1]*v[0]
+            dot = u[0]*v[0] + u[1]*v[1]
+            return np.arctan2(cross, dot)
+
+        for i in range(6):
+            ponto_alvo = pontos_externos_pontudos[i]   # onde os 4 triângulos se encontram
+
+            # candidatos aos pontos "recuados" adjacentes a esse vértice
+            recuado_cw = pontos_externos_recuados[i]      # lado (i, i+1)
+            recuado_ccw = pontos_externos_recuados[i - 1] # lado (i-1, i)
+
+            # direção radial (do centro principal para o ponto_alvo)
+            direcao_radial = normalize(ponto_alvo - centro_principal)
+
+            # decidir qual recuado está no sentido horário relativo à direcao_radial
+            ang1 = signed_angle(direcao_radial, recuado_cw - ponto_alvo)
+            ang2 = signed_angle(direcao_radial, recuado_ccw - ponto_alvo)
+            # o que tiver ângulo negativo é o clockwise (sentido horário) em relação à direcao_radial
+            if ang1 < 0:
+                recuado_horario = recuado_cw
+            else:
+                recuado_horario = recuado_ccw
+
+            # cria hexágono (no centro) e coloca um vértice sobre ponto_alvo
+            hex_externo = RegularPolygon(n=6, radius=LADO)
+            verts = hex_externo.get_vertices()
+            k = 0  # índice do vértice do hexágono que vamos fazer coincidir com ponto_alvo
+            desloc = ponto_alvo - verts[k]
+            hex_externo.shift(desloc)
+
+            # vetor de aresta atual (do vértice k para k+1) após o shift
+            v_k = hex_externo.get_vertices()[k]
+            v_k1 = hex_externo.get_vertices()[(k + 1) % 6]
+            edge_current = v_k1 - v_k
+
+            # vetor alvo: do vértice (ponto_alvo) até o ponto recuado do triângulo horário
+            target_edge = recuado_horario - ponto_alvo
+
+            # rotaciona o hexágono em torno do ponto_alvo para alinhar a aresta com o triângulo horário
+            ang_edge = signed_angle(edge_current, target_edge)
+            hex_externo.rotate(ang_edge, about_point=ponto_alvo)
+
+            # estilo e adicionar ao grupo
+            hex_externo.set_fill(COR_HEXAGONO, opacity=1.0).set_stroke(WHITE, width=3)
+            grupo_hexagonos_camada4.add(hex_externo)
+
+        self.play(Create(grupo_hexagonos_camada4))
+        self.wait(2)
+        # --- PARTE 6: ADICIONAR TRIÂNGULOS NOS NOVOS HEXÁGONOS ---
+        grupo_triangulos_camada5 = VGroup()
+
+        for hex_externo in grupo_hexagonos_camada4:
+            vertices = hex_externo.get_vertices()
+
+            for i in range(6):
+                p1 = vertices[i]
+                p2 = vertices[(i + 1) % 6]
+
+                # calcula o ponto externo (igual na Parte 2)
+                vetor_lado = p2 - p1
+                ponto_medio = (p1 + p2) / 2
+                vetor_normal = rotate_vector(vetor_lado, -PI/2)  # sempre para fora
+                altura = LADO * np.sqrt(3) / 2
+                p3 = ponto_medio + normalize(vetor_normal) * altura
+
+                triangulo = Polygon(p1, p2, p3)
+                triangulo.set_fill(COR_TRIANGULOS, opacity=1.0).set_stroke(WHITE, width=3)
+                grupo_triangulos_camada5.add(triangulo)
+
+        self.play(Create(grupo_triangulos_camada5))
+        self.wait(2)
+        # --- PARTE 7 (CORRIGIDA): COMPLETAR VÉRTICES SEM SOBREPOR HEXÁGONOS ---
+        grupo_triangulos_extra = VGroup()
+        altura = LADO * np.sqrt(3) / 2  # altura do triângulo equilátero
+        eps_dup = 1e-3  # tolerância para evitar duplicatas
+
+        # teste ponto dentro de polígono (ray-casting) — espera vértices em 2D (x,y)
+        def point_in_polygon(pt, poly_verts_2d):
+            x, y = float(pt[0]), float(pt[1])
+            inside = False
+            n = len(poly_verts_2d)
+            for i in range(n):
+                xi, yi = float(poly_verts_2d[i][0]), float(poly_verts_2d[i][1])
+                xj, yj = float(poly_verts_2d[(i + 1) % n][0]), float(poly_verts_2d[(i + 1) % n][1])
+                intersect = ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi) + xi)
+                if intersect:
+                    inside = not inside
+            return inside
+
+        # centroids de triângulos já colocados (camada5) para evitar recriar os mesmos
+        existing_centroids = []
+        for tri in grupo_triangulos_camada5:
+            verts_tri = np.array([v[:2] for v in tri.get_vertices()])
+            existing_centroids.append(np.mean(verts_tri, axis=0))
+
+        # loop por cada hexágono externo já criado
+        for hex_externo in grupo_hexagonos_camada4:
+            verts3 = hex_externo.get_vertices()                     # lista de 3D verts
+            verts = [np.array([v[0], v[1]]) for v in verts3]        # 2D verts
+            center_hex = np.array([hex_externo.get_center()[0], hex_externo.get_center()[1]])
+
+            # para cada vértice do hexágono, gerar candidatos em passos de 60°
+            for j, v in enumerate(verts):
+                # recomputa os pontos externos adjacentes (mesma fórmula usada antes)
+                p_prev = verts[(j - 1) % 6]
+                p_next = verts[(j + 1) % 6]
+
+                def external_point(a, b):
+                    side = b - a
+                    mid = (a + b) / 2
+                    # rota 90°; garantir que normal aponte para fora do hexágono
+                    normal3 = rotate_vector(np.array([side[0], side[1], 0]), -PI / 2)
+                    normal2 = np.array([normal3[0], normal3[1]])
+                    if np.dot(normal2, mid - center_hex) < 0:
+                        normal2 = -normal2
+                    return mid + (normal2 / np.linalg.norm(normal2)) * altura
+
+                ext_prev = external_point(p_prev, v)
+                # usamos ext_prev como referência angular inicial
+                theta_base = np.arctan2(ext_prev[1] - v[1], ext_prev[0] - v[0])
+
+                # gerar 6 candidatos (passos de 60°); adicionar só os que NÃO caem dentro do hexágono
+                for k in range(6):
+                    ang = theta_base + k * (PI / 3)
+                    p2 = v + np.array([np.cos(ang), np.sin(ang)]) * LADO
+                    p3 = v + np.array([np.cos(ang + PI / 3), np.sin(ang + PI / 3)]) * LADO
+                    centroid = (v + p2 + p3) / 3
+
+                    # ignora se centróide está dentro do próprio hexágono (evita sobreposição)
+                    if point_in_polygon(centroid, verts):
+                        continue
+
+                    # ignora se já existe triângulo muito próximo (dup)
+                    dup = False
+                    for c in existing_centroids:
+                        if np.linalg.norm(centroid - c) < 0.1:  # 0.1 é margem razoável
+                            dup = True
+                            break
+                    if dup:
+                        continue
+
+                    # cria e adiciona triângulo
+                    tri = Polygon(np.array([v[0], v[1], 0]),
+                                  np.array([p2[0], p2[1], 0]),
+                                  np.array([p3[0], p3[1], 0]))
+                    tri.set_fill(COR_TRIANGULOS, opacity=1.0).set_stroke(WHITE, width=3)
+                    grupo_triangulos_extra.add(tri)
+                    existing_centroids.append(centroid)
+
+        self.play(Create(grupo_triangulos_extra))
+        self.wait(3)
+
     </code></pre>
   </div>
   <button onclick="copiarCodigo('codigo7')">Copiar Código</button>
+    <script>
+    function copiarCodigo(id) {
+        const codigo = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(codigo).then(() => {
+            alert("Código copiado!");
+        });
+    }
+    </script>                      
+  <!-- Link do vídeo -->
+  <p>Vídeo relacionado:<br>  
+          <iframe width="600" height="340"
+      src="https://www.youtube.com/embed/M4w_lTshuYA"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="border-radius:8px;">
+    </iframe>
+  </p>
+</section>
+</div>
+
+  <section class="section9">
+  <h2>Ladrilhamento (3,6,3,6)</h2>
+  <!-- Caixa para o código -->
+  <div class="code-box" id="codigo8">
+    <pre><code>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+    </code></pre>
+  </div>
+  <button onclick="copiarCodigo('codigo8')">Copiar Código</button>
     <script>
     function copiarCodigo(id) {
         const codigo = document.getElementById(id).innerText;
@@ -951,7 +1224,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
     </iframe>
   </p>
 </section>
-</div>
+ </div>
                     
 </body>
 </html>
