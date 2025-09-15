@@ -260,7 +260,48 @@ class Tiling333333(Scene):
   <!-- Caixa para o código -->
   <div class="code-box" id="codigo02">
     <pre><code>
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+from manim import *
+import numpy as np
+
+class Tiling4444Styled(Scene):
+    def construct(self):
+        self.camera.background_color = "#000000"  # fundo escuro
+        L = 2.2  # quadrados menores para caber mais
+
+        COLORS = color_gradient([TEAL, BLUE], 20)
+
+        def make_square(center, color):
+            half = L / 2
+            p1 = center + np.array([-half, -half, 0])
+            p2 = center + np.array([half, -half, 0])
+            p3 = center + np.array([half, half, 0])
+            p4 = center + np.array([-half, half, 0])
+            return Polygon(p1, p2, p3, p4, color=color, fill_opacity=1).set_stroke(BLACK, 1.5)
+
+        n_camadas = 3
+
+        # Camada 0
+        sq0 = make_square(np.array([0,0,0]), COLORS[0])
+        self.play(FadeIn(sq0, scale=0.5))
+        self.wait(0.3)
+
+        # Camadas externas
+        for k in range(1, n_camadas+1):
+            novos_quadrados = VGroup()
+            for i in range(-k, k+1):
+                for j in range(-k, k+1):
+                    if abs(i) == k or abs(j) == k:
+                        center = np.array([i*L, j*L, 0])
+                        color = COLORS[(i+j+k) % len(COLORS)]
+                        novos_quadrados.add(make_square(center, color))
+
+            # Animação mais perceptível
+            self.play(
+                LaggedStart(*[FadeIn(sq, scale=0.5) for sq in novos_quadrados],
+                            lag_ratio=0.5, run_time=1)
+            )
+            self.wait(3)
+
     </code></pre>
   </div>
   <button onclick="copiarCodigo('codigo02')">Copiar Código</button>
@@ -275,7 +316,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
   <!-- Link do vídeo -->
   <p>Vídeo relacionado:<br>  
           <iframe width="600" height="340"
-      src="https://www.youtube.com/embed/tIZmGaYscbw"
+      src="https://www.youtube.com/embed/2VCFexwejzQ"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
