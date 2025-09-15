@@ -885,6 +885,137 @@ class Tiling3636(Scene):
         for tri in layer3_triangles:
             self.play(Create(tri), run_time=run_time_per_piece)
         
+
+
+                # --- Etapa 5: Completar hexágonos externos com triângulos em todos os lados ---
+        layer4_triangles = VGroup()
+
+        def triangle_outside_edge(p1, p2):
+            """Constrói triângulo equilátero externo ao lado (p1,p2)."""
+            edge_vector = p2 - p1
+            side_length = np.linalg.norm(edge_vector)
+            mid_point = (p1 + p2) / 2
+            perp_vector = rotate_vector(edge_vector, -PI / 2)
+            unit_perp = perp_vector / side_length
+            height = side_length * np.sqrt(3) / 2
+
+            # O vetor normal aponta para fora ou para dentro.
+            # Precisamos escolher o que aponta mais longe da origem (fora).
+            candidate1 = mid_point + unit_perp * height
+            candidate2 = mid_point - unit_perp * height
+            chosen = candidate1 if np.linalg.norm(candidate1) > np.linalg.norm(candidate2) else candidate2
+
+            return Polygon(p1, p2, chosen, color=COLOR_TRI, fill_opacity=1).set_stroke(BLACK, 2)
+
+        # Para cada hexágono da camada 2
+        for hexagon in layer2_hexagons_list:
+            verts = hexagon.get_vertices()
+            for i in range(6):
+                p1, p2 = verts[i], verts[(i + 1) % 6]
+
+                # Verifica se já existe algum triângulo ocupando esse lado
+                already_filled = False
+                for tri in list(layer1_triangles) + list(layer3_triangles) + list(layer4_triangles):
+                    tri_verts = tri.get_vertices()
+                    # Se dois vértices coincidem com (p1,p2), já tem triângulo
+                    matches = sum([np.linalg.norm(tv - p1) < 0.01 or np.linalg.norm(tv - p2) < 0.01 for tv in tri_verts])
+                    if matches >= 2:
+                        already_filled = True
+                        break
+
+                if not already_filled:
+                    new_tri = triangle_outside_edge(p1, p2)
+                    if add_polygon_if_unique(new_tri, layer4_triangles):
+                        self.play(Create(new_tri), run_time=run_time_per_piece)
+        # --- Etapa 6: Adicionar hexágonos externos (encaixando nos triângulos) ---
+        layer5_hexagons = VGroup()
+        layer5_hexagons_list = []
+
+        def hexagon_from_edge(p1, p2):
+            """Constrói um hexágono regular externo compartilhando lado (p1,p2)."""
+            side_vector = p2 - p1
+            hex_points = [p1, p2]
+            current_point = p2
+            angle = -PI / 3
+            for _ in range(4):
+                side_vector = rotate_vector(side_vector, angle)
+                current_point = current_point + side_vector
+                hex_points.append(current_point)
+            new_hex = Polygon(*hex_points, color=COLOR_HEX, fill_opacity=1).set_stroke(BLACK, 2)
+
+            # decide se mantém ou reflete o hexágono
+            # o centro deve ficar mais distante da origem do que o lado base
+            base_mid = (p1 + p2) / 2
+            if np.linalg.norm(new_hex.get_center()) < np.linalg.norm(base_mid):
+                # inverte a rotação para gerar para fora
+                hex_points = [p1, p2]
+                current_point = p2
+                angle = PI / 3
+                side_vector = p2 - p1
+                for _ in range(4):
+                    side_vector = rotate_vector(side_vector, angle)
+                    current_point = current_point + side_vector
+                    hex_points.append(current_point)
+                new_hex = Polygon(*hex_points, color=COLOR_HEX, fill_opacity=1).set_stroke(BLACK, 2)
+
+            return new_hex
+
+        for tri in layer4_triangles:
+            verts = tri.get_vertices()
+            # o vértice externo é o mais distante da origem
+            outer_v = verts[np.argmax([np.linalg.norm(v) for v in verts])]
+
+            # pega as arestas que têm esse vértice
+            for edge in [(verts[0], verts[1]), (verts[1], verts[2]), (verts[2], verts[0])]:
+                if not (np.allclose(outer_v, edge[0]) or np.allclose(outer_v, edge[1])):
+                    continue
+                p1, p2 = edge
+
+                new_hex = hexagon_from_edge(p1, p2)
+                if add_polygon_if_unique(new_hex, layer5_hexagons):
+                    layer5_hexagons_list.append(new_hex)
+
+        for hx in layer5_hexagons:
+            self.play(Create(hx), run_time=run_time_per_piece)
+
+        # --- Etapa 7: Completar hexágonos externos da camada 5 com triângulos ---
+        layer6_triangles = VGroup()
+
+        def triangle_outside_edge(p1, p2):
+            """Constrói triângulo equilátero externo ao lado (p1,p2)."""
+            edge_vector = p2 - p1
+            side_length = np.linalg.norm(edge_vector)
+            mid_point = (p1 + p2) / 2
+            perp_vector = rotate_vector(edge_vector, -PI / 2)
+            unit_perp = perp_vector / side_length
+            height = side_length * np.sqrt(3) / 2
+
+            # escolher o ponto externo (mais longe da origem)
+            candidate1 = mid_point + unit_perp * height
+            candidate2 = mid_point - unit_perp * height
+            chosen = candidate1 if np.linalg.norm(candidate1) > np.linalg.norm(candidate2) else candidate2
+
+            return Polygon(p1, p2, chosen, color=COLOR_TRI, fill_opacity=1).set_stroke(BLACK, 2)
+
+        for hexagon in layer5_hexagons_list:
+            verts = hexagon.get_vertices()
+            for i in range(6):
+                p1, p2 = verts[i], verts[(i + 1) % 6]
+
+                # verifica se já tem triângulo nesse lado
+                already_filled = False
+                for tri in list(layer1_triangles) + list(layer3_triangles) + list(layer4_triangles) + list(layer6_triangles):
+                    tri_verts = tri.get_vertices()
+                    matches = sum([np.linalg.norm(tv - p1) < 0.01 or np.linalg.norm(tv - p2) < 0.01 for tv in tri_verts])
+                    if matches >= 2:
+                        already_filled = True
+                        break
+
+                if not already_filled:
+                    new_tri = triangle_outside_edge(p1, p2)
+                    if add_polygon_if_unique(new_tri, layer6_triangles):
+                        self.play(Create(new_tri), run_time=run_time_per_piece)
+
         self.wait(3)
     </code></pre>
   </div>
