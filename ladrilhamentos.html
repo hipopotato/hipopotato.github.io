@@ -1655,11 +1655,558 @@ class EstrelaBase(Scene):
 </div>
 
   <section class="section9">
-  <h2>Ladrilhamento (3,6,3,6)</h2>
+  <h2>Ladrilhamento (3,4,3,3,4)</h2>
   <!-- Caixa para o código -->
   <div class="code-box" id="codigo8">
     <pre><code>
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
+from manim import *
+
+class LadrilhamentoAnimado(MovingCameraScene):
+    def construct(self):
+        
+        # --- 1. Definir Cores ---
+        COR_TRIANGULO = BLUE
+        COR_QUADRADO = YELLOW
+
+        # --- 2. Definir Vértices Base ---
+        ponto_A = np.array([-2, -1, 0])
+        ponto_B = np.array([2, -1, 0])
+        altura = 2 * np.sqrt(3)
+        ponto_C = np.array([0, -1 + altura, 0])
+        ponto_base_medio = np.array([0, -1, 0])
+
+        # --- 3. Criar Objetos Originais ---
+        triangulo_T1 = Polygon(
+            ponto_A, ponto_B, ponto_C, 
+            stroke_color=WHITE,
+            fill_color=COR_TRIANGULO,
+            fill_opacity=0.5
+        )
+        
+        V_AC = ponto_C - ponto_A
+        V_perp_AC = np.array([-V_AC[1], V_AC[0], 0])
+        ponto_D = ponto_C + V_perp_AC
+        ponto_E = ponto_A + V_perp_AC
+        
+        quadrado_Q1 = Polygon(
+            ponto_A, ponto_C, ponto_D, ponto_E,
+            stroke_color=WHITE,
+            fill_color=COR_QUADRADO,
+            fill_opacity=0.5
+        )
+
+        V_BC = ponto_C - ponto_B
+        V_perp_BC = np.array([V_BC[1], -V_BC[0], 0])
+        ponto_G = ponto_C + V_perp_BC
+        ponto_F = ponto_B + V_perp_BC 
+        
+        quadrado_Q2 = Polygon(
+            ponto_B, ponto_C, ponto_G, ponto_F,
+            stroke_color=WHITE,
+            fill_color=COR_QUADRADO,
+            fill_opacity=0.5
+        )
+
+        # --- 4. Objetos Refletidos ---
+        eixo_simetria_ponto = np.array([0, -1, 0])
+        eixo_simetria_vetor = RIGHT
+
+        triangulo_T2 = triangulo_T1.copy()
+        triangulo_T2.flip(axis=eixo_simetria_vetor, about_point=eixo_simetria_ponto)
+
+        quadrado_Q3 = quadrado_Q1.copy()
+        quadrado_Q3.flip(axis=eixo_simetria_vetor, about_point=eixo_simetria_ponto)
+
+        quadrado_Q4 = quadrado_Q2.copy()
+        quadrado_Q4.flip(axis=eixo_simetria_vetor, about_point=eixo_simetria_ponto)
+
+        # --- 5. Objetos Rotacionados ---
+        triangulo_T3 = triangulo_T1.copy()
+        triangulo_T3.rotate(angle=-150 * DEGREES, about_point=ponto_B)
+
+        triangulo_T4 = triangulo_T1.copy()
+        triangulo_T4.rotate(angle=150 * DEGREES, about_point=ponto_A)
+
+        # --- 6. Eixos de Reflexão Verticais ---
+        verts_T4 = triangulo_T4.get_vertices()
+        eixo_esq_ponto = verts_T4[1] 
+        eixo_esq_vetor = DOWN         
+
+        verts_T3 = triangulo_T3.get_vertices()
+        eixo_dir_ponto = verts_T3[0]  
+        eixo_dir_vetor = DOWN         
+
+        # --- 7. Novas Reflexões (Grupos) ---
+        grupo_esq_orig = VGroup(triangulo_T4, quadrado_Q1, quadrado_Q3)
+        grupo_esq_refletido = grupo_esq_orig.copy()
+        grupo_esq_refletido.flip(axis=eixo_esq_vetor, about_point=eixo_esq_ponto)
+        
+        triangulo_T5 = grupo_esq_refletido[0].set_color(COR_TRIANGULO)
+        quadrado_Q5 = grupo_esq_refletido[1].set_color(COR_QUADRADO)
+        quadrado_Q6 = grupo_esq_refletido[2].set_color(COR_QUADRADO)
+
+        grupo_dir_orig = VGroup(triangulo_T3, quadrado_Q2, quadrado_Q4)
+        grupo_dir_refletido = grupo_dir_orig.copy()
+        grupo_dir_refletido.flip(axis=eixo_dir_vetor, about_point=eixo_dir_ponto)
+
+        triangulo_T6 = grupo_dir_refletido[0].set_color(COR_TRIANGULO)
+        quadrado_Q7 = grupo_dir_refletido[1].set_color(COR_QUADRADO)
+        quadrado_Q8 = grupo_dir_refletido[2].set_color(COR_QUADRADO)
+
+        # --- 7b. Rotações do vértice C ---
+        triangulo_T7 = triangulo_T1.copy()
+        triangulo_T7.rotate(angle=210 * DEGREES, about_point=ponto_C)
+
+        triangulo_T8 = triangulo_T1.copy()
+        triangulo_T8.rotate(angle=150 * DEGREES, about_point=ponto_C)
+
+        # --- 7c. Rotações adicionais ---
+        vertice_topo_T3 = triangulo_T3.get_vertices()[2] 
+        triangulo_T9 = triangulo_T3.copy()
+        triangulo_T9.rotate(angle=150 * DEGREES, about_point=vertice_topo_T3) 
+
+        vertice_topo_T4 = triangulo_T4.get_vertices()[1] 
+        triangulo_T10 = triangulo_T4.copy()
+        triangulo_T10.rotate(angle=150 * DEGREES, about_point=vertice_topo_T4) 
+
+        quadrado_Q9 = quadrado_Q1.copy()
+        quadrado_Q9.rotate(angle=150 * DEGREES, about_point=ponto_D) 
+
+        quadrado_Q10 = quadrado_Q2.copy()
+        quadrado_Q10.rotate(angle=210 * DEGREES, about_point=ponto_G) 
+
+        # --- 7d. Novas rotações/reflexões ---
+        verts_T6_d = triangulo_T6.get_vertices() 
+        vertice_dir_T6 = verts_T6_d[np.argmax(verts_T6_d[:, 0])] 
+        triangulo_T11 = triangulo_T6.copy()
+        triangulo_T11.rotate(angle=150 * DEGREES, about_point=vertice_dir_T6) 
+
+        verts_T10_d = triangulo_T10.get_vertices() 
+        indices_y_ordenados = np.argsort(verts_T10_d[:, 1])
+        v_topo1 = verts_T10_d[indices_y_ordenados[-1]] 
+        v_topo2 = verts_T10_d[indices_y_ordenados[-2]] 
+        
+        triangulo_T12 = triangulo_T10.copy()
+        triangulo_T12.flip(axis=(v_topo2 - v_topo1), about_point=v_topo1)
+
+        verts_Q5 = quadrado_Q5.get_vertices()
+        vertice_topo_Q5 = verts_Q5[np.argmax(verts_Q5[:, 1])] 
+        quadrado_Q11 = quadrado_Q5.copy()
+        quadrado_Q11.rotate(angle=210 * DEGREES, about_point=vertice_topo_Q5) 
+
+        # --- 7e. Rotação Q7 ---
+        verts_Q7_e = quadrado_Q7.get_vertices() 
+        vertice_topo_Q7 = verts_Q7_e[np.argmax(verts_Q7_e[:, 1])] 
+        quadrado_Q12 = quadrado_Q7.copy()
+        quadrado_Q12.rotate(angle=150 * DEGREES, about_point=vertice_topo_Q7) 
+
+        # --- 7f. Rotações (vértices direita) ---
+        verts_Q12_f = quadrado_Q12.get_vertices()
+        vertice_dir_Q12 = verts_Q12_f[np.argmax(verts_Q12_f[:, 0])]
+        quadrado_Q16 = quadrado_Q12.copy()
+        quadrado_Q16.rotate(angle=210 * DEGREES, about_point=vertice_dir_Q12) 
+        
+        verts_Q7 = quadrado_Q7.get_vertices()
+        vertice_dir_Q7 = verts_Q7[np.argmax(verts_Q7[:, 0])]
+        quadrado_Q17 = quadrado_Q7.copy()
+        quadrado_Q17.rotate(angle=150 * DEGREES, about_point=vertice_dir_Q7) 
+
+        verts_Q8 = quadrado_Q8.get_vertices()
+        vertice_dir_Q8 = verts_Q8[np.argmax(verts_Q8[:, 0])]
+        quadrado_Q18 = quadrado_Q8.copy()
+        quadrado_Q18.rotate(angle=210 * DEGREES, about_point=vertice_dir_Q8) 
+
+        # --- 7g. Rotações (vértices baixo) ---
+        verts_Q6 = quadrado_Q6.get_vertices()
+        vertice_baixo_Q6 = verts_Q6[np.argmin(verts_Q6[:, 1])]
+        quadrado_Q19 = quadrado_Q6.copy()
+        quadrado_Q19.rotate(angle=150 * DEGREES, about_point=vertice_baixo_Q6) 
+
+        verts_Q3 = quadrado_Q3.get_vertices()
+        vertice_baixo_Q3 = verts_Q3[np.argmin(verts_Q3[:, 1])]
+        quadrado_Q20 = quadrado_Q3.copy()
+        quadrado_Q20.rotate(angle=210 * DEGREES, about_point=vertice_baixo_Q3) 
+
+        verts_Q4 = quadrado_Q4.get_vertices()
+        vertice_baixo_Q4 = verts_Q4[np.argmin(verts_Q4[:, 1])]
+        quadrado_Q21 = quadrado_Q4.copy()
+        quadrado_Q21.rotate(angle=150 * DEGREES, about_point=vertice_baixo_Q4) 
+
+        verts_Q8_b = quadrado_Q8.get_vertices() 
+        vertice_baixo_Q8 = verts_Q8_b[np.argmin(verts_Q8_b[:, 1])]
+        quadrado_Q22 = quadrado_Q8.copy()
+        quadrado_Q22.rotate(angle=210 * DEGREES, about_point=vertice_baixo_Q8) 
+
+        # --- 7h. Rotações (vértices esquerda) ---
+        verts_Q11 = quadrado_Q11.get_vertices()
+        vertice_esq_Q11 = verts_Q11[np.argmin(verts_Q11[:, 0])]
+        quadrado_Q23 = quadrado_Q11.copy()
+        quadrado_Q23.rotate(angle=150 * DEGREES, about_point=vertice_esq_Q11) 
+
+        verts_Q5_e = quadrado_Q5.get_vertices() 
+        vertice_esq_Q5 = verts_Q5_e[np.argmin(verts_Q5_e[:, 0])]
+        quadrado_Q24 = quadrado_Q5.copy()
+        quadrado_Q24.rotate(angle=210 * DEGREES, about_point=vertice_esq_Q5) 
+
+        verts_Q6_e = quadrado_Q6.get_vertices() 
+        vertice_esq_Q6 = verts_Q6_e[np.argmin(verts_Q6_e[:, 0])]
+        quadrado_Q25 = quadrado_Q6.copy()
+        quadrado_Q25.rotate(angle=150 * DEGREES, about_point=vertice_esq_Q6) 
+
+        # --- 7i. Rotações Finais ---
+        verts_Q18 = quadrado_Q18.get_vertices()
+        vertice_baixo_Q18 = verts_Q18[np.argmin(verts_Q18[:, 1])]
+        quadrado_Q26 = quadrado_Q18.copy()
+        quadrado_Q26.rotate(angle=150 * DEGREES, about_point=vertice_baixo_Q18) 
+
+        verts_Q25_i = quadrado_Q25.get_vertices() 
+        vertice_baixo_Q25 = verts_Q25_i[np.argmin(verts_Q25_i[:, 1])]
+        quadrado_Q27 = quadrado_Q25.copy()
+        quadrado_Q27.rotate(angle=210 * DEGREES, about_point=vertice_baixo_Q25) 
+
+        ANGULO_Q25_BAIXO = 150 * DEGREES 
+        ANGULO_Q3_BAIXO = 210 * DEGREES  
+        ANGULO_Q6_BAIXO = 150 * DEGREES  
+        ANGULO_Q4_BAIXO = 150 * DEGREES  
+        ANGULO_Q8_BAIXO = 210 * DEGREES  
+        ANGULO_Q18_BAIXO = 150 * DEGREES 
+        
+        verts_Q23 = quadrado_Q23.get_vertices()
+        vertice_topo_Q23 = verts_Q23[np.argmax(verts_Q23[:, 1])]
+        quadrado_Q28 = quadrado_Q23.copy()
+        quadrado_Q28.rotate(angle=210 * DEGREES, about_point=vertice_topo_Q23)
+
+        verts_Q11_i = quadrado_Q11.get_vertices() 
+        vertice_topo_Q11 = verts_Q11_i[np.argmax(verts_Q11_i[:, 1])]
+        quadrado_Q29 = quadrado_Q11.copy()
+        quadrado_Q29.rotate(angle=ANGULO_Q25_BAIXO, about_point=vertice_topo_Q11)
+
+        verts_Q9 = quadrado_Q9.get_vertices()
+        vertice_topo_Q9 = verts_Q9[np.argmax(verts_Q9[:, 1])]
+        quadrado_Q30 = quadrado_Q9.copy()
+        quadrado_Q30.rotate(angle=ANGULO_Q3_BAIXO, about_point=vertice_topo_Q9)
+
+        verts_Q10 = quadrado_Q10.get_vertices()
+        vertice_topo_Q10 = verts_Q10[np.argmax(verts_Q10[:, 1])]
+        quadrado_Q31 = quadrado_Q10.copy()
+        quadrado_Q31.rotate(angle=ANGULO_Q4_BAIXO, about_point=vertice_topo_Q10)
+
+        verts_Q12_i = quadrado_Q12.get_vertices() 
+        vertice_topo_Q12 = verts_Q12_i[np.argmax(verts_Q12_i[:, 1])]
+        quadrado_Q32 = quadrado_Q12.copy()
+        quadrado_Q32.rotate(angle=ANGULO_Q8_BAIXO, about_point=vertice_topo_Q12)
+
+        verts_Q16_i = quadrado_Q16.get_vertices() 
+        vertice_topo_Q16 = verts_Q16_i[np.argmax(verts_Q16_i[:, 1])]
+        quadrado_Q33 = quadrado_Q16.copy()
+        quadrado_Q33.rotate(angle=ANGULO_Q18_BAIXO, about_point=vertice_topo_Q16)
+
+        # --- 7j. Rotações Triângulos Anteriores ---
+        verts_T9_j = triangulo_T9.get_vertices() 
+        vertice_esq_T9 = verts_T9_j[np.argmin(verts_T9_j[:, 0])]
+        triangulo_T13 = triangulo_T9.copy()
+        triangulo_T13.rotate(angle=150 * DEGREES, about_point=vertice_esq_T9) 
+
+        verts_T11_j = triangulo_T11.get_vertices() 
+        vertice_esq_T11 = verts_T11_j[np.argmin(verts_T11_j[:, 0])]
+        triangulo_T14 = triangulo_T11.copy()
+        triangulo_T14.rotate(angle=60 * DEGREES, about_point=vertice_esq_T11) 
+
+        verts_T8_j = triangulo_T8.get_vertices() 
+        vertice_esq_T8 = verts_T8_j[np.argmin(verts_T8_j[:, 0])] 
+        vertice_dir_T8 = verts_T8_j[np.argmax(verts_T8_j[:, 0])] 
+        triangulo_T15 = triangulo_T8.copy()
+        triangulo_T15.rotate(angle=150 * DEGREES, about_point=vertice_esq_T8) 
+        triangulo_T16 = triangulo_T8.copy()
+        triangulo_T16.rotate(angle=150 * DEGREES, about_point=vertice_dir_T8) 
+
+        verts_T12_j = triangulo_T12.get_vertices() 
+        vertice_topo_T12 = verts_T12_j[np.argmax(verts_T12_j[:, 1])]
+        triangulo_T17 = triangulo_T12.copy()
+        triangulo_T17.rotate(angle=150 * DEGREES, about_point=vertice_topo_T12) 
+        triangulo_T18 = triangulo_T12.copy()
+        triangulo_T18.rotate(angle=210 * DEGREES, about_point=vertice_topo_T12) 
+
+        # --- 7k. Últimas Rotações Triângulos (Renumerado) ---
+        verts_T12_k = triangulo_T12.get_vertices() 
+        vertice_esq_T12 = verts_T12_k[np.argmin(verts_T12_k[:, 0])]
+        triangulo_T19 = triangulo_T12.copy()
+        triangulo_T19.rotate(angle=150 * DEGREES, about_point=vertice_esq_T12) 
+
+        verts_T18_k = triangulo_T18.get_vertices() 
+        vertice_esq_T18 = verts_T18_k[np.argmin(verts_T18_k[:, 0])]
+        triangulo_T20 = triangulo_T18.copy()
+        triangulo_T20.rotate(angle=150 * DEGREES, about_point=vertice_esq_T18) 
+
+        verts_T5_k = triangulo_T5.get_vertices() 
+        vertice_esq_T5 = verts_T5_k[np.argmin(verts_T5_k[:, 0])]
+        triangulo_T21 = triangulo_T5.copy()
+        triangulo_T21.rotate(angle=150 * DEGREES, about_point=vertice_esq_T5) 
+
+        verts_T13_k = triangulo_T13.get_vertices() 
+        vertice_topo_T13 = verts_T13_k[np.argmax(verts_T13_k[:, 1])]
+        triangulo_T22 = triangulo_T13.copy()
+        triangulo_T22.rotate(angle=300 * DEGREES, about_point=vertice_topo_T13) 
+
+        verts_T9_k = triangulo_T9.get_vertices() 
+        vertice_esq_T9_k = verts_T9_k[np.argmin(verts_T9_k[:, 0])]
+        triangulo_T23 = triangulo_T9.copy()
+        triangulo_T23.rotate(angle=300 * DEGREES, about_point=vertice_esq_T9_k) 
+
+        verts_T14_k = triangulo_T14.get_vertices() 
+        vertice_topo_T14 = verts_T14_k[np.argmax(verts_T14_k[:, 1])]
+        triangulo_T24 = triangulo_T14.copy()
+        triangulo_T24.rotate(angle=150 * DEGREES, about_point=vertice_topo_T14) 
+        triangulo_T25 = triangulo_T14.copy()
+        triangulo_T25.rotate(angle=210 * DEGREES, about_point=vertice_topo_T14) 
+
+        # --- 7l. Rotações Adicionais de Triângulos ---
+        verts_T21_l = triangulo_T21.get_vertices() 
+        vertice_esq_T21 = verts_T21_l[np.argmin(verts_T21_l[:, 0])]
+        triangulo_T26 = triangulo_T21.copy()
+        triangulo_T26.rotate(angle=150 * DEGREES, about_point=vertice_esq_T21) 
+
+        verts_T11_l = triangulo_T11.get_vertices() 
+        vertice_baixo_T11 = verts_T11_l[np.argmin(verts_T11_l[:, 1])]
+        triangulo_T27 = triangulo_T11.copy()
+        triangulo_T27.rotate(angle=150 * DEGREES, about_point=vertice_baixo_T11) 
+
+        verts_T16_l = triangulo_T16.get_vertices() 
+        vertice_dir_T16 = verts_T16_l[np.argmax(verts_T16_l[:, 0])]
+        triangulo_T28 = triangulo_T16.copy()
+        triangulo_T28.rotate(angle=300 * DEGREES, about_point=vertice_dir_T16) 
+
+        # --- 7m. Rotações Finais de Triângulos (Parte 1) ---
+        verts_T27_m = triangulo_T27.get_vertices() 
+        vertice_baixo_T27 = verts_T27_m[np.argmin(verts_T27_m[:, 1])]
+        triangulo_T29 = triangulo_T27.copy()
+        triangulo_T29.rotate(angle=150 * DEGREES, about_point=vertice_baixo_T27) 
+        
+        min_y_indices = np.where(triangulo_T21.get_vertices()[:, 1] == triangulo_T21.get_vertices()[:, 1].min())[0]
+        if len(min_y_indices) > 1:
+            vertice_baixo_dir_T21 = triangulo_T21.get_vertices()[min_y_indices[np.argmax(triangulo_T21.get_vertices()[min_y_indices, 0])]]
+        else:
+            vertice_baixo_dir_T21 = triangulo_T21.get_vertices()[min_y_indices[0]]
+        triangulo_T31 = triangulo_T21.copy()
+        triangulo_T31.rotate(angle=60 * DEGREES, about_point=vertice_baixo_dir_T21) 
+
+        verts_T19_m = triangulo_T19.get_vertices() 
+        vertice_baixo_T19 = verts_T19_m[np.argmin(verts_T19_m[:, 1])]
+        triangulo_T32 = triangulo_T19.copy()
+        triangulo_T32.rotate(angle=60 * DEGREES, about_point=vertice_baixo_T19) 
+
+        verts_T15_m = triangulo_T15.get_vertices() 
+        vertice_dir_T15 = verts_T15_m[np.argmax(verts_T15_m[:, 0])]
+        triangulo_T34 = triangulo_T15.copy()
+        triangulo_T34.rotate(angle=150 * DEGREES, about_point=vertice_dir_T15) 
+
+        verts_T28_m = triangulo_T28.get_vertices() 
+        vertice_topo_T28 = verts_T28_m[np.argmax(verts_T28_m[:, 1])]
+        triangulo_T35 = triangulo_T28.copy()
+        triangulo_T35.rotate(angle=150 * DEGREES, about_point=vertice_topo_T28) 
+
+        # --- 7n. Rotações Finais de Triângulos (Parte 2) ---
+        verts_T25_n = triangulo_T25.get_vertices() 
+        vertice_topo_T25 = verts_T25_n[np.argmax(verts_T25_n[:, 1])]
+        triangulo_T37 = triangulo_T25.copy()
+        triangulo_T37.rotate(angle=210 * DEGREES, about_point=vertice_topo_T25) 
+
+        verts_T17_n = triangulo_T17.get_vertices() 
+        vertice_dir_T17 = verts_T17_n[np.argmax(verts_T17_n[:, 0])]
+        triangulo_T38 = triangulo_T17.copy()
+        triangulo_T38.rotate(angle=210 * DEGREES, about_point=vertice_dir_T17) 
+
+        # --- 7o. Rotações Finais de Triângulos (Parte 3) ---
+        verts_T27_o = triangulo_T27.get_vertices() 
+        vertice_baixo_T27_o = verts_T27_o[np.argmin(verts_T27_o[:, 1])]
+        triangulo_T42 = triangulo_T27.copy()
+        triangulo_T42.rotate(angle=300 * DEGREES, about_point=vertice_baixo_T27_o) 
+
+        verts_T31_o = triangulo_T31.get_vertices() 
+        vertice_baixo_T31 = verts_T31_o[np.argmin(verts_T31_o[:, 1])]
+        triangulo_T43 = triangulo_T31.copy()
+        triangulo_T43.rotate(angle=150 * DEGREES, about_point=vertice_baixo_T31) 
+
+        verts_T37_o = triangulo_T37.get_vertices() 
+        vertice_dir_T37 = verts_T37_o[np.argmax(verts_T37_o[:, 0])]
+        triangulo_T44 = triangulo_T37.copy()
+        triangulo_T44.rotate(angle=300 * DEGREES, about_point=vertice_dir_T37) 
+
+        # --- 7p. Rotações Finais 2 ---
+        verts_T20_p = triangulo_T20.get_vertices()
+        vertice_dir_T20 = verts_T20_p[np.argmax(verts_T20_p[:, 0])]
+        triangulo_T45 = triangulo_T20.copy()
+        triangulo_T45.rotate(angle=60 * DEGREES, about_point=vertice_dir_T20) 
+
+        verts_T43_p = triangulo_T43.get_vertices()
+        vertice_baixo_T43 = verts_T43_p[np.argmin(verts_T43_p[:, 1])]
+        triangulo_T46 = triangulo_T43.copy()
+        triangulo_T46.rotate(angle=300 * DEGREES, about_point=vertice_baixo_T43) 
+
+        # --- 7q. Rotações Finais 3 ---
+        verts_T46_q = triangulo_T46.get_vertices()
+        vertice_esq_T46 = verts_T46_q[np.argmin(verts_T46_q[:, 2])]
+        triangulo_T48 = triangulo_T46.copy()
+        triangulo_T48.rotate(angle=150 * DEGREES, about_point=vertice_esq_T46)
+
+        verts_T22_q = triangulo_T22.get_vertices()
+        vertice_esq_T22 = verts_T22_q[np.argmin(verts_T22_q[:, 0])]
+        triangulo_T49 = triangulo_T22.copy()
+        triangulo_T49.rotate(angle=150 * DEGREES, about_point=vertice_esq_T22)
+
+        # --- 8. Ajustar Câmera ---
+        cena_completa = VGroup(
+            triangulo_T1, quadrado_Q1, quadrado_Q2,
+            triangulo_T2, quadrado_Q3, quadrado_Q4,
+            triangulo_T3, triangulo_T4,
+            triangulo_T5, quadrado_Q5, quadrado_Q6,
+            triangulo_T6, quadrado_Q7, quadrado_Q8,
+            triangulo_T7, triangulo_T8,
+            triangulo_T9, triangulo_T10,
+            quadrado_Q9, quadrado_Q10,
+            triangulo_T11, triangulo_T12, quadrado_Q11,
+            quadrado_Q12,
+            quadrado_Q16,
+            quadrado_Q17,
+            quadrado_Q18,
+            quadrado_Q19,
+            quadrado_Q20,
+            quadrado_Q21,
+            quadrado_Q22,
+            quadrado_Q23,
+            quadrado_Q24,
+            quadrado_Q25,
+            quadrado_Q26, 
+            quadrado_Q27,
+            quadrado_Q28,
+            quadrado_Q29,
+            quadrado_Q30,
+            quadrado_Q31,
+            quadrado_Q32,
+            quadrado_Q33,
+            triangulo_T13,
+            triangulo_T14,
+            triangulo_T15,
+            triangulo_T16,
+            triangulo_T17,
+            triangulo_T18,
+            triangulo_T19,
+            triangulo_T20,
+            triangulo_T21,
+            triangulo_T22,
+            triangulo_T23,
+            triangulo_T24,
+            triangulo_T25, 
+            triangulo_T26,
+            triangulo_T27,
+            triangulo_T28,
+            triangulo_T29,
+            triangulo_T31,
+            triangulo_T32,
+            triangulo_T34,
+            triangulo_T35,
+            triangulo_T37,
+            triangulo_T38, 
+            triangulo_T42,
+            triangulo_T43,
+            triangulo_T44,
+            triangulo_T45,
+            triangulo_T46,
+            triangulo_T48,
+            triangulo_T49,
+        )
+
+        self.camera.frame.scale_to_fit_height(cena_completa.get_height())
+        self.camera.frame.move_to(cena_completa.get_center())
+
+        # --- 9. Animar a Construção (sem labels) ---
+        self.play(Create(triangulo_T1))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q1), Create(quadrado_Q2))
+        self.wait(0.1)
+        self.play(TransformFromCopy(triangulo_T1, triangulo_T2), TransformFromCopy(quadrado_Q1, quadrado_Q3), TransformFromCopy(quadrado_Q2, quadrado_Q4))
+        self.wait(0.1)
+        self.play(Create(triangulo_T3), Create(triangulo_T4))
+        self.wait(0.1)
+        self.play(TransformFromCopy(grupo_esq_orig, grupo_esq_refletido))
+        self.wait(0.1)
+        self.play(TransformFromCopy(grupo_dir_orig, grupo_dir_refletido))
+        self.wait(0.1)
+        self.play(Create(triangulo_T7), Create(triangulo_T8))
+        self.wait(0.1)
+        self.play(Create(triangulo_T9), Create(triangulo_T10))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q9), Create(quadrado_Q10))
+        self.wait(0.1)
+        self.play(Create(triangulo_T11))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q11))
+        self.wait(0.1)
+        self.play(Create(triangulo_T12))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q12))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q16), Create(quadrado_Q17), Create(quadrado_Q18))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q19), Create(quadrado_Q20), Create(quadrado_Q21), Create(quadrado_Q22))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q23), Create(quadrado_Q24), Create(quadrado_Q25))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q26), Create(quadrado_Q27))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q28), Create(quadrado_Q29), Create(quadrado_Q30))
+        self.wait(0.1)
+        self.play(Create(quadrado_Q31), Create(quadrado_Q32), Create(quadrado_Q33))
+        self.wait(0.1)
+        self.play(Create(triangulo_T13), Create(triangulo_T14))
+        self.wait(0.1)
+        self.play(Create(triangulo_T15), Create(triangulo_T16))
+        self.wait(0.1)
+        self.play(Create(triangulo_T17), Create(triangulo_T18))
+        self.wait(0.1)
+        self.play(Create(triangulo_T19), Create(triangulo_T20))
+        self.wait(0.1)
+        self.play(Create(triangulo_T21), Create(triangulo_T22))
+        self.wait(0.1)
+        self.play(Create(triangulo_T23), Create(triangulo_T24))
+        self.wait(0.1)
+        self.play(Create(triangulo_T25))
+        self.wait(0.1)
+        self.play(Create(triangulo_T26), Create(triangulo_T27))
+        self.wait(0.1)
+        self.play(Create(triangulo_T28))
+        self.wait(0.1)
+        self.play(Create(triangulo_T29))
+        self.wait(0.1)
+        self.play(Create(triangulo_T31))
+        self.wait(0.1)
+        self.play(Create(triangulo_T32))
+        self.wait(0.1)
+        self.play(Create(triangulo_T34))
+        self.wait(0.1)
+        self.play(Create(triangulo_T35))
+        self.wait(0.1)
+        self.play(Create(triangulo_T37))
+        self.wait(0.1)
+        self.play(Create(triangulo_T38))
+        self.wait(0.1)
+        self.play(Create(triangulo_T42))
+        self.wait(0.1)
+        self.play(Create(triangulo_T43))
+        self.wait(0.1)
+        self.play(Create(triangulo_T44))
+        self.wait(0.1)
+        self.play(Create(triangulo_T45))
+        self.wait(0.1)
+        self.play(Create(triangulo_T46))
+        self.wait(0.1)
+        self.play(Create(triangulo_T48))
+        self.wait(0.1)
+        self.play(Create(triangulo_T49))
+        self.wait(2)
+
+
+
     </code></pre>
   </div>
   <button onclick="copiarCodigo('codigo8')">Copiar Código</button>
@@ -1674,7 +2221,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)
   <!-- Link do vídeo -->
   <p>Vídeo relacionado:<br>  
           <iframe width="600" height="340"
-      src="https://www.youtube.com/embed/tIZmGaYscbw"
+      src="https://www.youtube.com/embed/-81SVeiSCtE"
       title="YouTube video player"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
