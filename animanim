@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="LiYCKidjfsyxb615zTwvCFEzp2_DPelhKscx3tpmVgU" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Ladrilhamentos</title>
+</head>
+<body>
+ <div id="navbar"></div> <!-- Aqui será inserida a barra de navegação -->
 
+    <script>
+        // Carregar a navegação automaticamente
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
+
+    <!-- Cabeçalho -->
+    <header class="main-header">
+ <h1>Animações de Ladrilhamentos Bem Comportados com manim e IA</h1>
+       </header>
+    <section class="section1">
+      <p style="text-align: justify;">
+    Nesta seção, disponibilizo vídeos e os códigos-fonte correspondentes de algumas construções matemáticas que realizei.
+
+As animações foram feitas em Python com a biblioteca Manim. Para a elaboração dos scripts, utilizei o ChatGPT como ferramenta, fornecendo os comandos e fazendo os ajustes necessários até chegar ao resultado final.
+
+O tema explorado são os ladrilhamentos bem-comportados. De forma rápida, um ladrilhamento é 'bem-comportado' quando preenche o plano perfeitamente, sem falhas ou sobreposições, usando apenas polígonos regulares, com a interseção sendo apenas um lado ou vértice e a distribuição de polígonos em cada vértice é sempre a mesma.
+      
+      Existem 11 tipos de ladrilhamentos bem comportados. Dentre eles, três são formados por polígonos regulares de um único tipo: o triangular, com padrão (3,3,3,3,3,3); o quadrado, com padrão (4,4,4,4); e o hexagonal, com padrão (6,6,6). Os oito restantes são formados por dois ou mais tipos de polígonos regulares, sendo eles: (3,12,12), (4,6,12), (4,8,8), (3,4,6,4), (3,6,3,6), (3,3,3,4,4), (3,3,3,3,6) e (3,4,3,3,4). A seguir, apresentam-se os códigos utilizados e os vídeos renderizados correspondentes a cada construção.</p>
+
+    </section>
+
+</body>
+</html>
