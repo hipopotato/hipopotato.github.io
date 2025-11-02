@@ -23,78 +23,78 @@
  <h1>Animanim</h1>
        </header>
 <section class="section1">
-        <div class="content-container" style="text-align: justify;">
+    <div class="content-container">
 
-            <h2>🚀 Sobre o Projeto AniManim</h2>
-            <p>Bem-vindo ao AniManim! Esta é uma aplicação web educacional criada como parte de uma dissertação de mestrado do PROFMAT.</p>
-            <p>O objetivo principal deste projeto é fornecer uma ferramenta online, simples e acessível, onde professores e alunos possam escrever e executar códigos Python usando a biblioteca Manim para criar animações matemáticas, sem a necessidade de instalar o complexo ambiente Manim (com LaTeX, FFmpeg, etc.) em seus próprios computadores.</p>
+        <h2>O que é o AniManim?</h2>
 
-            <h2>🧠 Como Funciona: Uma Arquitetura Híbrida</h2>
-            <p>Este projeto não é um site comum. Ele é dividido em duas partes que trabalham juntas pela internet:</p>
+        <p>AniManim é uma ferramenta educacional criada para simplificar o uso da poderosa biblioteca de animação **Manim**, do Python. O projeto nasceu como parte de uma dissertação de mestrado do PROFMAT, com o objetivo de tornar a criação de animações matemáticas acessível a professores e alunos.</p>
+        
+        <p>Acesse o aplicativo clicando no botão abaixo:</p>
+        
+        <p style="text-align: center; margin: 20px 0;">
+            <a href="http://132.226.248.19:5001" target="_blank" rel="noopener noreferrer" class="btn-acesso">
+                Acessar o Aplicativo AniManim
+            </a>
+        </p>
 
-            <h3>1. O Frontend (O "Rosto" do Site)</h3>
-            <ul>
-                <li><strong>O que é:</strong> A interface que você está vendo agora (o editor de código, os botões, o console).</li>
-                <li><strong>Tecnologias:</strong> HTML, CSS e JavaScript.</li>
-                <li><strong>Onde está hospedado:</strong> No GitHub Pages, que é excelente para hospedar sites "estáticos" (sites que não mudam).</li>
-                <li><strong>Qual é o trabalho dele?</strong> Coletar o código Manim que você digita e enviá-lo para o "Cérebro" para ser processado.</li>
-            </ul>
+        <h2>Qual é o objetivo?</h2>
+        
+        <p>O aplicativo funciona como um "renderizador" online. Ele recebe o seu código Manim, executa esse código em um servidor seguro na nuvem e devolve o vídeo finalizado para você assistir ou baixar.</p>
+        
+        <p>Uma das principais ideias deste trabalho é facilitar o uso do Manim para quem não é programador. Como o Manim exige conhecimento de Python, uma **IA (como o Gemini)** pode ser usada para gerar o script da animação. O usuário pode, então, simplesmente **copiar o código da IA e colá-lo aqui** para renderizar o vídeo, sem precisar instalar ou configurar o complexo ambiente de desenvolvimento em sua própria máquina.</p>
 
-            <h3>2. O Backend (O "Cérebro" do Servidor)</h3>
-            <ul>
-                <li><strong>O que é:</strong> Um servidor Python que fica escondido na nuvem, esperando para receber pedidos do Frontend.</li>
-                <li><strong>Tecnologias:</strong>
-                    <ul>
-                        <li><strong>Python:</strong> A linguagem de programação.</li>
-                        <li><strong>Flask:</strong> Um micro-framework que permite ao Python "ouvir" e "responder" a pedidos da web (como um app.py).</li>
-                        <li><strong>Manim, LaTeX e FFmpeg:</strong> O conjunto de ferramentas que de fato lê o seu código e o transforma em um vídeo .mp4.</li>
-                        <li><strong>Ubuntu Server:</strong> O sistema operacional onde tudo isso roda.</li>
-                        <li><strong>Systemd:</strong> Um serviço do Linux que garante que o app.py fique online 24/7 e reinicie automaticamente se falhar.</li>
-                        <li><strong>Cron:</strong> Um agendador de tarefas do Linux que apaga automaticamente vídeos antigos para que o servidor não fique sem espaço.</li>
-                    </ul>
-                </li>
-                <li><strong>Onde está hospedado:</strong> Em uma Máquina Virtual (VM) "Always Free" (Sempre Gratuita) da Oracle Cloud.</li>
-                <li><strong>Qual é o trabalho dele?</strong> Receber o código, salvá-lo em um arquivo temporário, executar o Manim com segurança, pegar o vídeo .mp4 resultante (ou a mensagem de erro) e enviá-lo de volta para o seu navegador.</li>
-            </ul>
+        <h2>Como Funciona: A Arquitetura</h2>
 
-            <h2>📂 Onde Encontrar o Código</h2>
-            <p>Todo o código-fonte que faz o "Cérebro" (Backend) funcionar está disponível publicamente neste repositório do GitHub:</p>
-            <p>
-                <strong>Link do Repositório:</strong> 
-                <a href="https://github.com/hipopotato/animanim" target="_blank" rel="noopener noreferrer">https://github.com/hipopotato/animanim</a>
-            </p>
-            <p><small>(O código do "Rosto" (Frontend) está no repositório que serve o seu site do GitHub Pages).</small></p>
+        <p>Este projeto não é um site comum. Ele é dividido em duas partes que trabalham juntas pela internet:</p>
 
-            <h2>🤖 O Processo de Criação (Professora + IA)</h2>
-            <p>Este projeto é uma colaboração direta entre uma educadora e uma inteligência artificial.</p>
-            <ul>
-                <li><strong>A Arquiteta (Humana):</strong> A visão do projeto, os requisitos educacionais, a direção do fluxo de trabalho e o teste de funcionalidade foram todos fornecidos por mim, uma professora de matemática em formação no PROFMAT.</li>
-                <li><strong>A Engenheira (IA):</strong> O código-fonte completo (Python, Flask, HTML, CSS, JavaScript) e todos os comandos de administração do servidor (Linux, ufw, systemd, cron, etc.) foram gerados, depurados, refinados e explicados pelo Gemini, uma IA conversacional do Google.</li>
-            </ul>
+        <h3>1. O Frontend (O "Rosto" do Site)</h3>
+        <p>A interface que você está vendo agora (o editor de código, os botões, o console) é o Frontend. Ele é feito com HTML, CSS e JavaScript e está hospedado no **GitHub Pages**. Seu trabalho é coletar o código que você digita e enviá-lo para o "Cérebro" para ser processado.</p>
 
-            <div class="warning-box">
-                <h2>⚠️ Atenção: Como Fazer o Aplicativo Funcionar</h2>
-                <p><strong>Bem-vindo! Seu navegador (Chrome, Firefox, etc.) provavelmente bloqueará este aplicativo por padrão, mostrando uma tela em branco ou um aviso de "Não Seguro".</strong></p>
-                
-                <h3>Por que isso acontece?</h3>
-                <p>Este site (https) é seguro, mas para renderizar os vídeos, ele precisa se conectar ao nosso servidor (http). O navegador chama isso de "Conteúdo Misto" e o bloqueia para te proteger.</p>
-                
-                <p><strong>Para que o aplicativo funcione, você precisa permitir o "conteúdo inseguro" manualmente (apenas para este site):</strong></p>
+        <h3>2. O Backend (O "Cérebro" do Servidor)</h3>
+        <p>O "Cérebro" é um servidor Python que fica escondido na nuvem, em uma Máquina Virtual (VM) "Sempre Gratuita" da **Oracle Cloud**. Ele usa **Flask** para "ouvir" os pedidos do site e **Manim, LaTeX e FFmpeg** para transformar seu código em um vídeo. Para garantir que ele fique online 24/7, ele é gerenciado pelo **Systemd** (que o reinicia se falhar) e usa o **Cron** para apagar vídeos antigos automaticamente.</p>
 
-                <h3>➡️ No Google Chrome / Edge:</h3>
-                <ol>
-                    <li>Procure por um ícone de escudo (🛡️) ou "Não Seguro" no lado direito da barra de endereços.</li>
-                    <li>Clique nele.</li>
-                    <li>No menu que aparecer, clique em <strong>"Carregar scripts inseguros"</strong> (ou "Load unsafe scripts").</li>
-                </ol>
+        <h2>O Processo de Criação (Professora + IA)</h2>
+        
+        <p>Este projeto é uma colaboração direta entre uma educadora e uma inteligência artificial. A visão do projeto, os requisitos educacionais, a direção do fluxo de trabalho e o teste de funcionalidade foram fornecidos por mim, uma professora de matemática em formação no PROFMAT. O código-fonte completo (Python, Flask, HTML, CSS, JavaScript) e todos os comandos de administração do servidor (Linux, `ufw`, `systemd`, `cron`, etc.) foram gerados, depurados, refinados e explicados pelo **Gemini**, uma IA conversacional do Google.</p>
+        
+        <h2>📂 Onde Encontrar o Código</h2>
+        <p>Todo o código-fonte que faz o "Cérebro" (Backend) funcionar está disponível publicamente neste repositório do GitHub:</p>
+        <p><strong>Link do Repositório:</strong> <a href="https://github.com/hipopotato/animanim" target="_blank" rel="noopener noreferrer">https://github.com/hipopotato/animanim</a></p>
 
-                <h3>➡️ No Firefox:</h3>
-                <ol>
-                    <li>Procure por um ícone de cadeado (🔒) com um aviso na barra de endereços (lado esquerdo).</li>
-                    <li>Clique nele e, em seguida, clique na seta (➡️) que diz "A conexão não é segura".</li>
-                    <li>Clique no botão <strong>"Desativar proteção por enquanto"</strong> (ou "Disable protection for now").</li>
-                </ol>
-            </div> </div> </section>
+
+        <div class="warning-box">
+            <h2>⚠️ Atenção: Como Fazer o Aplicativo Funcionar</h2>
+            <p><strong>Bem-vindo! Seu navegador (Chrome, Firefox, etc.) provavelmente bloqueará este aplicativo por padrão, mostrando uma tela em branco ou um aviso de "Não Seguro".</strong></p>
+            
+            <h3>Por que isso acontece?</h3>
+            <p>Este site (`httpss`) é seguro, mas para renderizar os vídeos, ele precisa se conectar ao nosso servidor (`http`). O navegador chama isso de **"Conteúdo Misto"** e o bloqueia para te proteger.</p>
+            
+            <p><strong>Para que o aplicativo funcione, você precisa permitir o "conteúdo inseguro" manualmente (apenas para este site):</strong></p>
+
+            <h3>➡️ No Google Chrome / Edge:</h3>
+            <ol>
+                <li>Procure por um ícone de escudo (🛡️) ou "Não Seguro" no lado direito da barra de endereços.</li>
+                <li>Clique nele.</li>
+                <li>No menu que aparecer, clique em <strong>"Carregar scripts inseguros"</strong> (ou "Load unsafe scripts").</li>
+            </ol>
+
+            <h3>➡️ No Firefox:</h3>
+            <ol>
+                <li>Procure por um ícone de cadeado (🔒) com um aviso na barra de endereços (lado esquerdo).</li>
+                <li>Clique nele e, em seguida, clique na seta (➡️) que diz "A conexão não é segura".</li>
+                <li>Clique no botão <strong>"Desativar proteção por enquanto"</strong> (ou "Disable protection for now").</li>
+            </ol>
+
+            <p style="margin-top: 20px;"><strong>Aviso Final:</strong> Este é um projeto experimental e de prova de conceito. Ele pode conter erros. Como mencionado, foi realizado com o auxílio de IA por uma professora de matemática, não por uma programadora profissional.</p>
+        </div> <h2 style="margin-top: 30px;">Créditos</h2>
+        <p><strong>Idealização e Arquitetura:</strong> [Seu Nome Aqui]</p>
+        <p><strong>Desenvolvimento e Infraestrutura:</strong> Gemini (IA do Google)</p>
+
+        <p style="text-align: center; font-weight: bold; margin-top: 30px;">
+            Bom uso! Para dúvidas ou sugestões, por favor, utilize o formulário de contato na página inicial.
+        </p>
+
+    </div> </section>
 
 </body>
 </html>
