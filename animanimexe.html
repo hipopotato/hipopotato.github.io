@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <title>AniManim - Versão Desktop (.exe)</title> 
+</head>
+<body>
+ <div id="navbar"></div> <script>
+        // Carregar a navegação automaticamente (mantido do seu original)
+        fetch("navbar.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("navbar").innerHTML = data);
+    </script>
 
+    <header class="main-header">
+        <h1>AniManim (Versão Desktop .exe)</h1>
+    </header>
+
+    <section class="section1">
+        <div class="content-container">
+
+            <h2>O que é o AniManim Desktop?</h2>
+
+            <p>AniManim é uma ferramenta educacional criada para simplificar o uso da poderosa biblioteca de animação **Manim**, do Python. O projeto nasceu como parte de uma dissertação de mestrado do PROFMAT, com o objetivo de tornar a criação de animações matemáticas acessível a professores e alunos.</p>
+            
+            <p>Esta é a **versão executável para Windows (.exe)**. Você baixa o aplicativo e o executa diretamente no seu computador, sem precisar de um navegador ou conexão com a internet (após a instalação dos requisitos).</p>
+
+            <p style="text-align: center; margin: 20px 0;">
+                <a href="[COLOQUE SEU LINK DO MEDIAFIRE AQUI]" target="_blank" rel="noopener noreferrer" class="btn-acesso">
+                    Baixar AniManim.zip
+                </a>
+            </p>
+        </div>
+    </section>
+
+    <section class="section-tutorial">
+        <div class="content-container">
+            <center>
+                <h2>Tutorial Geral do Manim</h2>
+                <p>Veja um exemplo de animação criada com o Manim para entender o básico do código:</p>
+                <p> 
+                    <iframe width="600" height="340"
+                            src="https://www.youtube.com/embed/2NAwCAxtjOM"
+                            title="Tutorial de Animação Manim"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            style="border-radius:8px;">
+                    </iframe>
+                </p>
+            </center>
+        </div>
+    </section>
+
+    <section class="section2">
+        <div class="content-container">
+
+            <h2>Qual é o objetivo?</h2>
+            
+            <p>O aplicativo funciona como uma interface gráfica (GUI) para o Manim. Ele permite que você cole seu código, escolha a qualidade, renderize o vídeo e veja os erros em um console amigável, tudo sem precisar usar o terminal de comando.</p>
+            
+            <p>Uma das principais ideias deste trabalho é facilitar o uso do Manim para quem não é programador. Como o Manim exige conhecimento de Python, uma **IA (como o Gemini)** pode ser usada para gerar o script da animação. O usuário pode, então, simplesmente **copiar o código da IA e colá-lo no AniManim** para renderizar o vídeo.</p>
+
+            <h2>O que é o arquivo .exe?</h2>
+            <p>O arquivo `.exe` (que significa "executável") é o aplicativo AniManim completo, "empacotado" para rodar no Windows **sem que você precise instalar o Python ou a biblioteca Manim manualmente**.</p>
+            <p>Ao baixar o arquivo `.zip`, você encontrará uma pasta contendo o `AniManim.exe` e vários outros arquivos e subpastas. O `.exe` precisa desses arquivos para funcionar, então **mantenha todos os arquivos juntos na mesma pasta** e execute o `AniManim.exe`.</p>
+            <p><strong>É seguro?</strong> Como é um projeto de pesquisa e não um software de uma grande empresa, o Windows ou seu antivírus podem exibir um aviso de "Editor Desconhecido" (SmartScreen). Se isso acontecer, você pode precisar clicar em "Mais informações" e depois em "Executar assim mesmo" para abri-lo.</p>
+
+
+            <div class="warning-box">
+                <h2>⚠️ Requisitos Obrigatórios para Rodar</h2>
+                <p>Este aplicativo **NÃO** é um pacote "tudo-em-um". Ele é uma interface que *controla* o Manim. Para que o AniManim funcione, seu computador (Windows) **DEVE TER** os seguintes programas externos instalados e configurados:</p>
+
+                <h3>1. $\LaTeX$ (Obrigatório)</h3>
+                <p>Essencial para o Manim renderizar qualquer texto ou fórmula matemática.</p>
+                <p><strong>Recomendação para Windows:</strong> <a href="https://miktex.org/download" target="_blank" rel="noopener noreferrer"><strong>MiKTeX (Baixe aqui)</strong></a></p>
+
+                <h3>2. FFmpeg (Obrigatório)</h3>
+                <p>Fundamental para o Manim juntar as imagens e criar o arquivo de vídeo `.mp4`.</p>
+                <p><strong>Link para Download:</strong> <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener noreferrer"><strong>FFmpeg.org (Baixe aqui)</strong></a></p>
+                
+                <p style="margin-top: 15px;"><strong>Dica:</strong> Após instalar ambos, abra o AniManim, clique no botão **'i' (Informações)** e use o botão **"Verificar Dependências"** para checar se o aplicativo está conseguindo encontrá-los no seu sistema.</p>
+            </div>
+            
+            <h2 style="margin-top: 30px;">Instruções de Instalação</h2>
+            <ol>
+                <li>Faça o download do arquivo `AniManim.zip` usando o botão no topo da página.</li>
+                <li>Clique com o botão direito no arquivo `.zip` baixado e escolha **"Extrair tudo..."**.</li>
+                <li>Extraia os arquivos para uma pasta de sua preferência.</li>
+                <li>Abra a pasta `AniManim` que foi criada.</li>
+                <li>Clique duas vezes em `AniManim.exe` para iniciar o programa.</li>
+                <li>Não se esqueça de ler o arquivo `LEIA-ME.txt` (incluído no ZIP) para instruções completas!</li>
+            </ol>
+            
+            <h2 style="margin-top: 30px;">O Processo de Criação (Professora + IA)</h2>
+            
+            <p>Este projeto é uma colaboração direta entre uma educadora e uma inteligência artificial. A visão do projeto, os requisitos educacionais, a direção do fluxo de trabalho e o teste de funcionalidade foram fornecidos por mim, uma professora de matemática em formação no PROFMAT. O código-fonte completo da interface (Python/Tkinter) foi gerado, depurado e refinado pelo **Gemini**, uma IA conversacional do Google.</p>
+            
+            <h2>Aviso Final</h2>
+            <p>Este é um projeto experimental e de prova de conceito. Ele pode conter erros. Como mencionado, foi realizado com o auxílio de IA por uma professora de matemática, não por uma programadora profissional.</p>
+
+            <h2 style="margin-top: 30px;">Créditos</h2>
+            <p><strong>Idealização e Arquitetura:</strong> Daiane D.</p>
+            <p><strong>Desenvolvimento (Código da Interface):</strong> Gemini (IA do Google)</p>
+
+            <p style="text-align: center; font-weight: bold; margin-top: 30px;">
+                Bom uso!
+            </p>
+
+        </div>
+    </section>
+
+</body>
+</html>
